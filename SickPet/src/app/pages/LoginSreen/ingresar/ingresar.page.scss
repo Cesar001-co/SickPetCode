@@ -1,0 +1,63 @@
+body{
+    background-color: white;
+}
+
+p{
+    text-align: left;
+    font-size: 20px;
+
+    font-family: Segoe UI;
+}
+
+.FlechaIcon{
+    font-size: 30px;
+    color: var(--ion-color-myColor);
+    padding: 27px 27px 0px;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+
+.flex-center.forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-center.logo{
+    margin-top: 74px;
+}
+
+section{
+    width: 343px;
+    height: 66px;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border: 1px solid #CDD4D9;
+    border-radius: 8px;
+}
+
+label{
+    font-size: 12px;
+    color: #000000;
+}
+
+input{
+    font-size: 17px;
+    background-color: transparent;
+    border: transparent;
+}
+
+.forms{
+    font-family: Segoe UI;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

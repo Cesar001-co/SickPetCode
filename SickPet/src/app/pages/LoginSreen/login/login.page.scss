@@ -1,0 +1,41 @@
+body {
+    background: url(/assets/Fondo01.png) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoSickpet_splashsreen {
+    margin-bottom: 85px;
+}
+
+.Contenedor_botones {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    width: 332px;
+    height: 70px;
+    background-color: transparent;
+    border: 2px solid var(--ion-color-myColor-contrast);
+    border-radius: 40px;
+    margin-bottom: 21px;
+
+    font-family: Segoe UI;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--ion-color-myColor-contrast);
+    transition: .3s ease all;
+}
+
+.btn:active{
+    background: var(--ion-color-myColor-contrast);
+    transition: .3s ease-in-out all;
+    color: var(--ion-color-myColor);
+}
