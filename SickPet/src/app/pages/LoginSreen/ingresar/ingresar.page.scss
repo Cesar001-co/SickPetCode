@@ -1,9 +1,14 @@
-body{
-    background-color: white;
+ion-content{
+    --background: var(--ion-color-myColor-contrast);
+}
+
+ion-toolbar{
+    --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
 form{
     padding: 43px;
+    padding-bottom: 0;
     z-index: 10;
     overflow: hidden;
     position: relative;
@@ -20,6 +25,11 @@ form{
 
     border: 1px solid #CDD4D9;
     border-radius: 8px;
+    transition: .3s all;
+}
+
+.input-container:hover{
+    border: 1px solid #8618D9;
 }
 
 label{
@@ -38,7 +48,7 @@ h3{
     
     font-size: 17px;
     font-family: Segoe UI;
-    transition: .3s;
+    transition: .3s all;
 }
 
 .FlechaIcon{
@@ -56,7 +66,7 @@ h3{
 .Recovery{
     display: flex;
     justify-content: right;
-    padding-bottom: 57px;
+    padding-bottom: 28px;
 }
 .Recovery p{
     font-size: 12px;
@@ -86,3 +96,4 @@ h3{
     border-radius: 40px;
     margin-bottom: 21px;
 }
+

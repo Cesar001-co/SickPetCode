@@ -1,0 +1,100 @@
+
+ion-content{
+    --background: var(--ion-color-myColor-contrast);
+}
+
+ion-toolbar{
+    --ion-toolbar-background: var(--ion-color-myColor-contrast);
+}
+
+form{
+    padding: 0px 43px;
+    z-index: 10;
+    overflow: hidden;
+    position: relative;
+
+    color: black;
+
+    font-family: Segoe UI;
+}
+
+.input-container{
+    position: relative;
+    margin: 21px 0px;
+    padding: 14px 14px;
+
+    border: 1px solid #CDD4D9;
+    border-radius: 8px;
+    transition: .3s all;
+}
+
+.input-container:hover{
+    border: 1px solid #8618D9;
+}
+
+label{
+    color: #BDBDBD;
+}
+
+h3{
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.input{
+    width: 90%;
+    outline: none;
+    border: none;
+    background: none;
+    
+    font-size: 17px;
+    font-family: Segoe UI;
+    transition: .3s all;
+}
+
+.FlechaIcon{
+    font-size: 30px;
+    color: var(--ion-color-myColor);
+    padding: 27px 27px 0px;
+}
+
+.flex-center{
+    margin-top: 74px;
+    display: flex;
+    justify-content: center;
+}
+
+.Recovery{
+    display: flex;
+    justify-content: right;
+    padding-bottom: 57px;
+}
+
+.Recovery p{
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--ion-color-myColor);
+    margin-top: 0;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+}
+
+.eyeicon{
+    font-size: 20px;
+}
+
+.btnCrear{
+    color: var(--ion-color-myColor-contrast);
+    font-size: 25px;
+    font-weight: 600;
+
+    width: 332px;
+    height: 70px;
+    background-color: var(--ion-color-myColor);
+    border: 2px solid var(--ion-color-myColor-contrast);
+    border-radius: 40px;
+    margin-bottom: 21px;
+}

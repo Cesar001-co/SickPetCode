@@ -1,9 +1,58 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>signin</ion-title>
+    <div>
+      <ion-icon class="FlechaIcon" name="arrow-back"></ion-icon>
+    </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <form action="">
+    <h3>Crear una cuenta</h3>
+    <div class="input-container">
+      <label for="">Nombres *</label>
+      <input type="text" name="nombres" class="input" placeholder="Nombre">
+    </div>
+    <div class="input-container">
+      <label for="">Apellidos *</label>
+      <input type="text" name="apellidos" class="input" placeholder="Apellidos">
+    </div>
+    <div class="input-container">
+      <label for="">Correo electronico *</label>
+      <input type="text" name="correo" class="input" placeholder="michael@gmail.com">
+    </div>
+    <div class="input-container">
+      <label for=""></label>
+      <input type="password" name="contraseña" class="input" placeholder="Contraseña">
+      <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
+    </div>
+    <div class="input-container">
+      <label for=""></label>
+      <input type="password" name="rep_contraseña" class="input" placeholder="Repetir contraseña">
+      <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
+    </div>
+    <div class="input-container">
+      <label for="subject"></label>
+      <select placeholder="Tipo de documento" name="tipo_doc" class="input" required>
+        <option disabled hidden selected>Tipo de documento</option>
+        <option>CC(Cedula ciudadana)</option>
+        <option>I'd like to make a proposal</option>
+        <option>Pasaporte</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <label for="">Numero de documento *</label>
+      <input type="text" name="num_documento" class="input" placeholder="12330002">
+    </div>
+    <div class="input-container">
+      <label for="">Numero de documento *</label>
+      <input type="text" name="num_documento" class="input" placeholder="12330002">
+    </div>
+    <div class="input-container">
+      <label for="">Numero de contacto (celular) *</label>
+      <input type="number" name="num_celular" class="input" placeholder="3112355">
+    </div>
+    <div class="btn">
+      <input type="submit" value="Crear" class="btnCrear">
+    </div>
+  </form>
 </ion-content>
