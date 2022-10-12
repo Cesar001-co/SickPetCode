@@ -26,19 +26,24 @@
         </g>
       </svg>
     </div>
-
-    
-    <!-- <p>Iniciar session</p>
-    <div class="forms">
-      <section>
-        <label position="stacked">Correo electronico</label>
-        <input placeholder="michael@gmail.com" type="email">
-      </section>
-      <section>
-        <label position="stacked">Correo electronico</label>
-        <input placeholder="michael@gmail.com" type="email">
-      </section>
-    </div> -->
+    <form action="">
+      <h3>Iniciar sesion</h3>
+      <div class="input-container">
+        <label for="">Correo electronico</label>
+        <input type="email" name="email" class="input" placeholder="michael@gmail.com">
+      </div>
+      <div class="input-container">
+        <label for="">Contraseña</label>
+        <input type="password" name="password" class="input" placeholder="***********">
+        <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
+      </div>
+      <div class="Recovery">
+        <p>Recuperar contraseña</p>
+      </div>
+      <div class="btn">
+        <input type="submit" value="Ingresar" class="btnIngresar">
+      </div>
+    </form>
   </body>
 
 </ion-content>
