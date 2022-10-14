@@ -13,6 +13,14 @@ const routes: Routes = [
     path: 'ingresar',
     loadChildren: () => import('./pages/LoginSreen/ingresar/ingresar.module').then( m => m.IngresarPageModule)
   },
+  {
+    path: 'register-confi',
+    loadChildren: () => import('./pages/LoginSreen/register-confi/register-confi.module').then( m => m.RegisterConfiPageModule)
+  },
+  {
+    path: 'new-password',
+    loadChildren: () => import('./pages/LoginSreen/new-password/new-password.module').then( m => m.NewPasswordPageModule)
+  },
 ];
 
 @NgModule({
