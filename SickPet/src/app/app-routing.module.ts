@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'new-password',
     loadChildren: () => import('./pages/LoginSreen/new-password/new-password.module').then( m => m.NewPasswordPageModule)
   },
+  {
+    path: 'select-user-tipe',
+    loadChildren: () => import('./pages/Users/select-user-tipe/select-user-tipe.module').then( m => m.SelectUserTipePageModule)
+  },
 ];
 
 @NgModule({
