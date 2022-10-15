@@ -6,6 +6,11 @@ ion-toolbar{
     --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
+ion-back-button{
+    --color: #8618D9;
+    --height: 50px;
+}
+
 form{
     padding: 43px;
     padding-bottom: 0;
