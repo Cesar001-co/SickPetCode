@@ -7,6 +7,12 @@ ion-toolbar{
     --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
+ion-back-button::part(icon){
+    color: var(--ion-color-myColor);
+    font-size: 30px;
+    padding: 0;
+}
+
 form{
     padding: 0px 43px;
     z-index: 10;

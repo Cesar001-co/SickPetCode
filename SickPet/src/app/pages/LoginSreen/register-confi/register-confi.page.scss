@@ -6,11 +6,17 @@ ion-toolbar{
     --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
-.closeIcon{
-    font-size: 30px;
+ion-back-button::part(icon){
     color: var(--ion-color-myColor);
-    padding: 27px 27px 0px;
+    font-size: 30px;
+    padding: 0;
 }
+
+// .closeIcon{
+//     font-size: 30px;
+//     color: var(--ion-color-myColor);
+//     padding: 27px 27px 0px;
+// }
 
 .flex-center{
     margin-top: 155px;
