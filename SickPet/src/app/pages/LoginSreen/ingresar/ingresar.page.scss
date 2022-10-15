@@ -6,9 +6,10 @@ ion-toolbar{
     --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
-ion-back-button{
-    --color: #8618D9;
-    --height: 50px;
+ion-back-button::part(icon){
+    color: var(--ion-color-myColor);
+    font-size: 30px;
+    padding: 0;
 }
 
 form{
@@ -56,11 +57,7 @@ h3{
     transition: .3s all;
 }
 
-.FlechaIcon{
-    font-size: 30px;
-    color: var(--ion-color-myColor);
-    padding: 27px 27px 0px;
-}
+
 
 .flex-center{
     margin-top: 74px;
