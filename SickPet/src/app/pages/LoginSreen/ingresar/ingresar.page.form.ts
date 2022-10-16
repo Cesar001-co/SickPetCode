@@ -10,7 +10,7 @@ export class IngresarPageForm {
 
     createForm(): FormGroup {
         return this.formBuilder.group({
-            email: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required]]
         });
     }
