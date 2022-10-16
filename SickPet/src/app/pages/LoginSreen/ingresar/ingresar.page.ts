@@ -13,4 +13,15 @@ export class IngresarPage implements OnInit {
   ngOnInit() {
   }
 
+  gotoNewPassword(){
+    this.router.navigate(['/new-password']);
+  }
+
+  gotoHome(){
+    this.router.navigate(['/home']);
+  }
+
+  gotoLogin(){
+    this.router.navigate(['/login']);
+  }
 }

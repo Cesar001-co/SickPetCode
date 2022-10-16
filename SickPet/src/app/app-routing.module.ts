@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'select-user-tipe',
     loadChildren: () => import('./pages/Users/select-user-tipe/select-user-tipe.module').then( m => m.SelectUserTipePageModule)
   },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
 ];
 
 @NgModule({

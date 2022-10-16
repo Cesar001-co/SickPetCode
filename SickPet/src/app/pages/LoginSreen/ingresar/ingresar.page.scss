@@ -1,101 +1,107 @@
-ion-content{
-    --background: var(--ion-color-myColor-contrast);
+ion-content {
+  --background: var(--ion-color-myColor-contrast);
 }
 
-ion-toolbar{
-    --ion-toolbar-background: var(--ion-color-myColor-contrast);
+ion-toolbar {
+  --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
-ion-back-button::part(icon){
-    color: var(--ion-color-myColor);
-    font-size: 30px;
-    padding: 0;
+// ion-back-button::part(icon){
+//     color: var(--ion-color-myColor);
+//     font-size: 30px;
+//     padding: 0;
+// }
+
+.FlechaIcon {
+  color: var(--ion-color-myColor);
+  font-size: 30px;
+  padding: 15px;
 }
 
-form{
-    padding: 43px;
-    padding-bottom: 0;
-    z-index: 10;
-    overflow: hidden;
-    position: relative;
+form {
+  padding: 43px;
+  padding-bottom: 0;
+  z-index: 10;
+  overflow: hidden;
+  position: relative;
 
-    color: black;
+  color: black;
 
-    font-family: Segoe UI;
+  font-family: Segoe UI;
 }
 
-.input-container{
-    position: relative;
-    margin: 21px 0px;
-    padding: 14px 14px;
+.input-container {
+  position: relative;
+  margin: 21px 0px;
+  padding: 14px 14px;
 
-    border: 1px solid #CDD4D9;
-    border-radius: 8px;
-    transition: .3s all;
+  border: 1px solid #CDD4D9;
+  border-radius: 8px;
+  transition: .3s all;
 }
 
-.input-container:hover{
-    border: 1px solid #8618D9;
+.input-container:hover {
+  border: 1px solid #8618D9;
 }
 
-label{
-    color: #BDBDBD;
+label {
+  color: #BDBDBD;
 }
 
-h3{
-    font-size: 20px;
+h3 {
+  font-size: 20px;
 }
 
-.input{
-    width: 90%;
-    outline: none;
-    border: none;
-    background: none;
-    
-    font-size: 17px;
-    font-family: Segoe UI;
-    transition: .3s all;
+.input {
+  width: 90%;
+  outline: none;
+  border: none;
+  background: none;
+
+  font-size: 17px;
+  font-family: Segoe UI;
+  transition: .3s all;
 }
 
 
 
-.flex-center{
-    margin-top: 74px;
-    display: flex;
-    justify-content: center;
+.flex-center {
+  margin-top: 74px;
+  display: flex;
+  justify-content: center;
 }
 
-.Recovery{
-    display: flex;
-    justify-content: right;
-    padding-bottom: 28px;
-}
-.Recovery p{
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--ion-color-myColor);
-    margin-top: 0;
+.Recovery {
+  display: flex;
+  justify-content: right;
+  padding-bottom: 28px;
 }
 
-.btn{
-    display: flex;
-    justify-content: center;
+.Recovery p {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--ion-color-myColor);
+  margin-top: 0;
 }
 
-.eyeicon{
-    font-size: 20px;
+.btn {
+  display: flex;
+  justify-content: center;
 }
 
-.btnIngresar{
-    color: var(--ion-color-myColor-contrast);
-    font-size: 25px;
-    font-weight: 600;
-
-    width: 332px;
-    height: 70px;
-    background-color: var(--ion-color-myColor);
-    border: 2px solid var(--ion-color-myColor-contrast);
-    border-radius: 40px;
-    margin-bottom: 21px;
+.eyeicon {
+  font-size: 20px;
 }
 
+.btnIngresar {
+  color: var(--ion-color-myColor-contrast);
+  font-size: 25px;
+  font-weight: 600;
+
+  width: 332px;
+  height: 70px;
+  background-color: var(--ion-color-myColor);
+  border: 2px solid var(--ion-color-myColor-contrast);
+  border-radius: 40px;
+  margin-bottom: 21px;
+}
