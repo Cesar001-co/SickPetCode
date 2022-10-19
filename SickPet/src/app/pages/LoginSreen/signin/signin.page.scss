@@ -13,6 +13,40 @@ ion-back-button::part(icon){
     padding: 0;
 }
 
+.val{
+    position: absolute;
+    height: 15px;
+    padding-left: 10px;
+}
+
+.nombre{
+    bottom: 764px;
+}
+
+.apellidos{
+    bottom: 664px;
+}
+
+.email{
+    bottom: 564px;
+}
+
+.contraseña1{
+    bottom: 484px;
+}
+
+.contraseña2{
+    bottom: 404px;
+}
+
+.numero1{
+    bottom: 204px;
+}
+
+.numero2{
+    bottom: 104px;
+}
+
 form{
     padding: 0px 43px;
     z-index: 10;
@@ -26,7 +60,7 @@ form{
 
 .input-container{
     position: relative;
-    margin: 21px 0px;
+    margin: 25px 0px;
     padding: 14px 14px;
 
     border: 1px solid #CDD4D9;

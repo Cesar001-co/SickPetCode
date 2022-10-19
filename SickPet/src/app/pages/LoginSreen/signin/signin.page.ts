@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IngresarPageForm } from './signin.page.forms';
 
 @Component({
   selector: 'app-signin',
@@ -8,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class SigninPage implements OnInit {
 
-  constructor(private router: Router) { }
+  form: FormGroup;
+
+  constructor(private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.form = new IngresarPageForm(this.formBuilder).createForm();
   }
 
   gotoLoginConfi(){

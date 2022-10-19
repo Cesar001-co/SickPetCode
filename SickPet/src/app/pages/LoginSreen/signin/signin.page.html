@@ -6,53 +6,76 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form action="">
+  <form [formGroup]="form">
     <h3>Crear una cuenta</h3>
     <div class="input-container">
       <label for="">Nombres *</label>
-      <input type="text" name="nombres" class="input" placeholder="Nombre">
+      <input formControlName="nombre" type="text" name="nombres" class="input" placeholder="Nombre">
     </div>
+    <!-- Validation message nombres -->
+    <ion-label class="val nombre" color="danger" *ngIf="form.get('nombre').touched && form.get('nombre').errors?.required">Nombre es obligatorio</ion-label>
+    <!-- ======================== -->
+
     <div class="input-container">
       <label for="">Apellidos *</label>
-      <input type="text" name="apellidos" class="input" placeholder="Apellidos">
+      <input formControlName="apellidos"  type="text" name="apellidos" class="input" placeholder="Apellidos">
     </div>
+    <!-- Validation message apellidos -->
+    <ion-label class="val apellidos" color="danger" *ngIf="form.get('apellidos').touched && form.get('apellidos').errors?.required">Apellidos es obligatorio</ion-label>
+    <!-- ======================== -->
+
     <div class="input-container">
       <label for="">Correo electronico *</label>
-      <input type="text" name="correo" class="input" placeholder="michael@gmail.com">
+      <input formControlName="email" type="text" name="correo" class="input" placeholder="michael@gmail.com">
     </div>
+    <!-- Validation message email -->
+    <ion-label class="val email" color="danger" *ngIf="form.get('email').touched && form.get('email').errors?.required">Correo es obligatorio</ion-label>
+    <ion-label class="val email" color="danger" *ngIf="form.get('email').touched && form.get('email').errors?.email">Correo invalido</ion-label>
+    <!-- ======================== -->
+    
     <div class="input-container">
       <label for=""></label>
-      <input type="password" name="contraseña" class="input" placeholder="Contraseña">
+      <input formControlName="password1" type="password" name="contraseña" class="input" placeholder="Contraseña">
       <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
     </div>
+    <!-- Validation message contraseña -->
+    <ion-label class="val contraseña1" color="danger" *ngIf="form.get('password1').touched && form.get('password1').errors?.required">Contraseña obligatoria</ion-label>
+    <!-- ======================== -->
     <div class="input-container">
       <label for=""></label>
-      <input type="password" name="rep_contraseña" class="input" placeholder="Repetir contraseña">
+      <input formControlName="password2" type="password" name="rep_contraseña" class="input" placeholder="Repetir contraseña">
       <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
     </div>
+    <!-- Validation message contraseña -->
+    <ion-label class="val contraseña2" color="danger" *ngIf="form.get('password2').touched && form.get('password2').errors?.required">Contraseña obligatoria</ion-label>
+    <!-- ======================== -->
+
     <div class="input-container">
       <label for="subject"></label>
+      <label for="">Tipo de documento *</label>
       <select placeholder="Tipo de documento" name="tipo_doc" class="input" required>
-        <option disabled hidden selected>Tipo de documento</option>
+        <!-- <option disabled hidden selected>Tipo de documento</option> -->
         <option>CC(Cedula ciudadana)</option>
-        <option>I'd like to make a proposal</option>
         <option>Pasaporte</option>
       </select>
     </div>
     <div class="input-container">
       <label for="">Numero de documento *</label>
-      <input type="text" name="num_documento" class="input" placeholder="12330002">
+      <input formControlName="numero1" maxlength="13" type="text" name="num_documento" class="input" placeholder="12330002">
     </div>
-    <div class="input-container">
-      <label for="">Numero de documento *</label>
-      <input type="text" name="num_documento" class="input" placeholder="12330002">
-    </div>
+    <!-- Validation message numero -->
+    <ion-label class="val numero1" color="danger" *ngIf="form.get('numero1').touched && form.get('numero1').errors?.required">Numero de cedula es obligatorio</ion-label>
+    <!-- ======================== -->
+
     <div class="input-container">
       <label for="">Numero de contacto (celular) *</label>
-      <input type="number" name="num_celular" class="input" placeholder="3112355">
+      <input formControlName="numero2" maxlength="13" type="number" name="num_celular" class="input" placeholder="3112355">
     </div>
+    <!-- Validation message numero -->
+    <ion-label class="val numero2" color="danger" *ngIf="form.get('numero2').touched && form.get('numero2').errors?.required">Numero de contacto es obligatorio</ion-label>
+    <!-- ======================== -->
     <div class="btn" (click)="gotoLoginConfi()">
-      <input type="submit" value="Crear" class="btnCrear">
+      <input type="submit" value="Crear" class="btnCrear" [disabled]="!form.valid">
     </div>
   </form>
 </ion-content>

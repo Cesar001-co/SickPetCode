@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { NewPasswordPage } from './new-password.page';
@@ -10,7 +11,8 @@ describe('NewPasswordPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NewPasswordPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),
+        ReactiveFormsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewPasswordPage);

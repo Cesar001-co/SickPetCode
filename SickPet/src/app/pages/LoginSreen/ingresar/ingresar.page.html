@@ -35,22 +35,30 @@
       </g>
     </svg>
   </div>
-  <form action="">
+  <form [formGroup]="form">
     <h3>Iniciar sesion</h3>
     <div class="input-container">
       <label for="">Correo electronico</label>
-      <input type="email" name="email" class="input" placeholder="michael@gmail.com">
+      <input type="email" formControlName="email" name="email" class="input" placeholder="michael@gmail.com">
+      
     </div>
+    <!-- Validation message email -->
+    <ion-label class="valEmail" color="danger" *ngIf="form.get('email').touched && form.get('email').errors?.required">Correo es obligatorio</ion-label>
+    <ion-label class="valEmail" color="danger" *ngIf="form.get('email').touched && form.get('email').errors?.email">Correo invalido</ion-label>
+    <!-- ======================== -->
     <div class="input-container">
       <label for="">Contraseña</label>
-      <input type="password" name="password" class="input" placeholder="***********">
+      <input type="password" name="password" formControlName="password" class="input" placeholder="***********">
       <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
     </div>
+    <!-- Validation message password -->
+    <ion-label class="valPass" color="danger" *ngIf="form.get('password').touched && form.get('password').errors?.required">Contraseña es obligatoria</ion-label>
+    <!-- ======================== -->
     <div class="Recovery" (click)="gotoNewPassword()">
       <p>Recuperar contraseña</p>
     </div>
-    <div class="btn" (click)="gotoHome()">
-      <input type="submit" value="Ingresar" class="btnIngresar">
+    <div class="btn" (click)="gotoHome()" >
+      <input type="submit" value="Ingresar" class="btnIngresar" [disabled]="!form.valid">
     </div>
   </form>
 </ion-content>

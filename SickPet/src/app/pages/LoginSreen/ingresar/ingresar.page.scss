@@ -12,6 +12,20 @@ ion-toolbar {
 //     padding: 0;
 // }
 
+.valEmail{
+  position: absolute;
+  height: 15px;
+  bottom: 258px;
+  padding-left: 10px;
+}
+
+.valPass{
+  position: absolute;
+  height: 15px;
+  bottom: 158px;
+  padding-left: 10px;
+}
+
 .FlechaIcon {
   color: var(--ion-color-myColor);
   font-size: 30px;
@@ -32,7 +46,7 @@ form {
 
 .input-container {
   position: relative;
-  margin: 21px 0px;
+  margin: 24px 0px;
   padding: 14px 14px;
 
   border: 1px solid #CDD4D9;
