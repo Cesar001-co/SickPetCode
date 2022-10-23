@@ -35,7 +35,7 @@
       </g>
     </svg>
   </div>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <h3>Iniciar sesion</h3>
     <div class="input-container">
       <label for="">Correo electronico</label>
@@ -57,7 +57,7 @@
     <div class="Recovery" (click)="gotoNewPassword()">
       <p>Recuperar contraseña</p>
     </div>
-    <div class="btn" (click)="gotoHome()" >
+    <div class="btn" (click)="onSubmit()" >
       <input type="submit" value="Ingresar" class="btnIngresar" [disabled]="!form.valid">
     </div>
   </form>
