@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { IngresarPageForm } from './ingresar.page.form';
 
@@ -13,7 +14,8 @@ export class IngresarPage implements OnInit {
 
   form: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService,
+    private alertController: AlertController) {
     this.form = new FormGroup({
       email: new FormControl(),
       password: new FormControl()
@@ -24,12 +26,12 @@ export class IngresarPage implements OnInit {
     this.form = new IngresarPageForm(this.formBuilder).createForm();
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.userService.login(this.form.value)
-    .then(response => {
-      this.router.navigate(['/home']);
-    })
-      .catch(error => console.log(error));
+      .then(response => {
+        this.router.navigate(['/home']);
+      })
+      .catch(error => this.errorAlert());
   }
 
   gotoNewPassword() {
@@ -42,5 +44,15 @@ export class IngresarPage implements OnInit {
 
   gotoLogin() {
     this.router.navigate(['/login']);
+  }
+
+  // ====================================
+  async errorAlert() {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: 'Algo mal ocurrio, verifica tu email y/o contraseña',
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

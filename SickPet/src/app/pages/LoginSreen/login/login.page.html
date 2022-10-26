@@ -1,9 +1,9 @@
 <ion-content>
-  <body class="flex-center">
-    <img class="logoSickpet_splashsreen" src="assets/Logo/SickPetLogo.svg" alt="LogoSickPet">
-    <div class="Contenedor_botones">
-      <button class="btn" name="Btn_registrarse" (click)="goTosignin()"><span>Registrarse</span></button>
-      <button class="btn" name="Btn_iniciarsesion" (click)="goToingresar()"><span>Inciar Session</span></button>
-    </div>
+  <body>
+    <ion-img src="assets/Logo/SickPetLogo.svg"></ion-img>
+    <ion-label class="contenedor_botones">
+      <ion-button class="btn InSesion" fill="outline" mode="ios" (click)="goToingresar()">Iniciar Sesion</ion-button>
+      <ion-button class="btn Registrar" fill="outline" mode="ios" (click)="goTosignin()">Registrarse</ion-button>
+    </ion-label>
   </body>
 </ion-content>

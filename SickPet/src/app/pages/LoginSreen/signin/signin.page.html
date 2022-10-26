@@ -6,76 +6,97 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="createUser">
+    <!-- (ngSubmit)="onSubmit()" -->
     <h3>Crear una cuenta</h3>
-    <div class="input-container">
-      <label for="">Nombres *</label>
-      <input formControlName="nombre" type="text" class="input" placeholder="Nombre">
-    </div>
-    <!-- Validation message nombres -->
-    <ion-label class="val nombre" color="danger" *ngIf="form.get('nombre').touched && form.get('nombre').errors?.required">Nombre es obligatorio</ion-label>
-    <!-- ======================== -->
+    <!-- Nombre input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Nombres</ion-label>
+      <ion-input type="text" placeholder="Nombre" [clearInput]="true" formControlName="nombre"></ion-input>
+      <!-- Validator message Nombre -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('nombre').touched && createUser.get('nombre').errors?.required">
+        Nombres obligatorios</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createUser.get('nombre').errors?.minlength">
+        Min 2 caracteres</ion-note>
+    </ion-item>
 
-    <div class="input-container">
-      <label for="">Apellidos *</label>
-      <input formControlName="apellidos"  type="text"  class="input" placeholder="Apellidos">
-    </div>
-    <!-- Validation message apellidos -->
-    <ion-label class="val apellidos" color="danger" *ngIf="form.get('apellidos').touched && form.get('apellidos').errors?.required">Apellidos es obligatorio</ion-label>
-    <!-- ======================== -->
+    <!-- Apellidos input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Apellidos</ion-label>
+      <ion-input type="text" placeholder="Apellido" [clearInput]="true" formControlName="apellidos"></ion-input>
+      <!-- Validator message Apellidos -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('apellidos').touched && createUser.get('apellidos').errors?.required">
+        Apellidos obligatorios</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createUser.get('apellidos').errors?.minlength">
+        Min 2 caracteres</ion-note>
+    </ion-item>
 
-    <div class="input-container">
-      <label for="">Correo electronico *</label>
-      <input formControlName="email" type="text"  class="input" placeholder="michael@gmail.com">
-    </div>
-    <!-- Validation message email -->
-    <ion-label class="val email" color="danger" *ngIf="form.get('email').touched && form.get('email').errors?.required">Correo es obligatorio</ion-label>
-    <ion-label class="val email" color="danger" *ngIf="form.get('email').touched && form.get('email').errors?.email">Correo invalido</ion-label>
-    <!-- ======================== -->
-    
-    <div class="input-container">
-      <label for=""></label>
-      <input formControlName="password1" type="password" class="input" placeholder="Contraseña">
-      <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
-    </div>
-    <!-- Validation message contraseña -->
-    <ion-label class="val contraseña1" color="danger" *ngIf="form.get('password1').touched && form.get('password1').errors?.required">Contraseña obligatoria</ion-label>
-    <!-- ======================== -->
-    <div class="input-container">
-      <label for=""></label>
-      <input formControlName="password2" type="password" class="input" placeholder="Repetir contraseña">
-      <ion-icon class="eyeicon" name="eye-outline" type="button" aria-hidden="true" id="eye"></ion-icon>
-    </div>
-    <!-- Validation message contraseña -->
-    <ion-label class="val contraseña2" color="danger" *ngIf="form.get('password2').touched && form.get('password2').errors?.required">Contraseña obligatoria</ion-label>
-    <!-- ======================== -->
+    <!-- Correo input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Correo electronico</ion-label>
+      <ion-input type="email" placeholder="michael@gmail.com" [clearInput]="true" formControlName="email"></ion-input>
+      <!-- Validator message email -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('email').touched && createUser.get('email').errors?.required">
+        Correo es obligatorio</ion-note>
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('email').touched && createUser.get('email').errors?.email">
+        Correo invalido</ion-note>
+    </ion-item>
 
-    <div class="input-container">
-      <label for="subject"></label>
-      <label for="">Tipo de documento *</label>
-      <select placeholder="Tipo de documento" class="input" required>
-        <!-- <option disabled hidden selected>Tipo de documento</option> -->
-        <option>CC(Cedula ciudadana)</option>
-        <option>Pasaporte</option>
-      </select>
-    </div>
-    <div class="input-container">
-      <label for="">Numero de documento *</label>
-      <input formControlName="numero1" maxlength="13" type="text" class="input" placeholder="12330002">
-    </div>
-    <!-- Validation message numero -->
-    <ion-label class="val numero1" color="danger" *ngIf="form.get('numero1').touched && form.get('numero1').errors?.required">Numero de cedula es obligatorio</ion-label>
-    <!-- ======================== -->
+    <!-- Contraseña_1 input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Ingrese una contraseña</ion-label>
+      <ion-input [minlength]="6" type="password" placeholder="************" formControlName="password"></ion-input>
+      <!-- Validator message password -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('password').touched && createUser.get('password').errors?.required">
+        Contraseña obligatoria</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createUser.get('password').errors?.minlength">
+        Min 6 caracteres</ion-note>
+    </ion-item>
 
-    <div class="input-container">
-      <label for="">Numero de contacto (celular) *</label>
-      <input formControlName="numero2" maxlength="13" type="number" class="input" placeholder="3112355">
-    </div>
-    <!-- Validation message numero -->
-    <ion-label class="val numero2" color="danger" *ngIf="form.get('numero2').touched && form.get('numero2').errors?.required">Numero de contacto es obligatorio</ion-label>
-    <!-- ======================== -->
-    <div class="btn" (click)="onSubmit()">
-      <input type="submit" value="Crear" class="btnCrear" [disabled]="!form.valid">
-    </div>
+    <!-- Contraseña_2 input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Reptia la contraseña</ion-label>
+      <ion-input [minlength]="6" type="password" placeholder="************" formControlName="repeatPassword">
+      </ion-input>
+      <!-- Validator message password -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('repeatPassword').touched && (createUser.get('password').value !== createUser.get('repeatPassword').value)">
+        La contraseña no es igual</ion-note>
+    </ion-item>
+
+    <!-- Numero documento input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Numero de documento</ion-label>
+      <ion-input [minlength]="6" maxlength="12" type="text" [clearInput]="true" formControlName="numDoc"></ion-input>
+      <!-- Validator message password -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('numDoc').touched && createUser.get('numDoc').errors?.required">
+        Numero de documento obligatorio</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createUser.get('numDoc').errors?.minlength">
+        Min 10 caracteres</ion-note>
+    </ion-item>
+
+    <!-- Numero contacto input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Numero de celular</ion-label>
+      <ion-input minlength="6" maxlength="14" type="tel" [clearInput]="true" formControlName="numCel"></ion-input>
+      <!-- Validator message password -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createUser.get('numCel').touched && createUser.get('numCel').errors?.required">
+        Numero de contacto obligatorio</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createUser.get('numCel').errors?.minlength">
+        Min 10 caracteres</ion-note>
+    </ion-item>
+
+    <!-- siguiente btn -->
+    <ion-label class="siguiente">
+      <ion-button class="btn Siguiente" mode="ios" [disabled]="!createUser.valid" (click)="agregarUsuer()">Siguiente</ion-button>
+    </ion-label>
+
   </form>
 </ion-content>

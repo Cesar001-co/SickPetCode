@@ -10,7 +10,7 @@ describe('SigninPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SigninPage ],
+      declarations: [SigninPage],
       imports: [IonicModule.forRoot(),
         ReactiveFormsModule]
     }).compileComponents();
@@ -18,9 +18,11 @@ describe('SigninPage', () => {
     fixture = TestBed.createComponent(SigninPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

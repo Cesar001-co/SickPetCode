@@ -1,41 +1,49 @@
+ion-content {
+  --background: none;
+}
+
 body {
-    background: url(/assets/Fondo01.png) no-repeat center center fixed;
-    background-size: cover;
+  background: url(/assets/Fondo01.png) no-repeat fixed center;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.flex-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.logoSickpet_splashsreen {
-    margin-bottom: 85px;
-}
-
-.Contenedor_botones {
-    display: flex;
-    flex-direction: column;
+.contenedor_botones {
+  padding: 75px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .btn {
-    width: 332px;
-    height: 70px;
-    background-color: transparent;
-    border: 2px solid var(--ion-color-myColor-contrast);
-    border-radius: 40px;
-    margin-bottom: 21px;
+  height: 60px;
+  width: 300px;
+  margin-bottom: 12px;
 
-    font-family: Segoe UI;
-    font-weight: 600;
-    font-size: 20px;
-    color: var(--ion-color-myColor-contrast);
-    transition: .3s ease all;
+  --border-radius: 40px;
+  --border-color: var(--ion-color-myColor-contrast): 
+  --border-style: solid;
+  --border-width: 2px;
+
+  --color: var(--ion-color-myColor-contrast);
+  font-family: Segoe UI;
+  font-weight: 650;
+  font-size: 20px;
 }
 
-.btn:active{
-    background: var(--ion-color-myColor-contrast);
-    transition: .3s ease-in-out all;
-    color: var(--ion-color-myColor);
+.InSesion {
+  --color: var(--ion-color-myColor);
+  --color-activated: var(--ion-color-myColor-contrast);
+  
+  --background: var(--ion-color-myColor-contrast);
+  --background-activated: var(--ion-color-myColor);
+}
+
+.Registrar {
+    --color-activated: var(--ion-color-myColor);
+    
+    --background-activated: var(--ion-color-myColor-contrast);
 }

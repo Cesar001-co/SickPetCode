@@ -13,10 +13,10 @@ export class IngresarPageForm {
             nombre:['', [Validators.required]],
             apellidos:['', [Validators.required]],
             email:['', [Validators.required, Validators.email]],
-            password1:['', [Validators.required]],
-            password2:['', [Validators.required]],
-            numero1:['', [Validators.required]],
-            numero2:['', [Validators.required]]
+            password:['', [Validators.required, Validators.minLength(6)]],
+            repeatPassword:['', [Validators.required]],
+            numDoc:['', [Validators.required, Validators.minLength(10)]],
+            numCel:['', [Validators.required, Validators.minLength(10)]]
         });
     }
 }
