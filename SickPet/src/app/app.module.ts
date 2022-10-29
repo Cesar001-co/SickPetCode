@@ -14,9 +14,10 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { UserTipePipe } from './LoginScreen/User/user-tipe.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserTipePipe],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
