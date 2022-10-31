@@ -4,6 +4,8 @@ export interface UserReg{
     uID: string;
     email: string;
     numDoc: string;
-    numCon: number;
+    numCon: string;
     perfil: 'per'|'clinica';
 }
+
+

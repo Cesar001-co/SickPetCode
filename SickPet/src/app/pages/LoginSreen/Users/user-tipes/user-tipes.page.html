@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <p>Para continuar debera seleccionar el <b>tipo de perfil.</b></p>
+    <ion-label class="contenedor_botones">
+      <ion-button fill="outline" class="btn" (click)="presentAlertPersona()">
+        <div class="btnitems"> 
+          <ion-img src="assets/img/mascotas.png"></ion-img>
+          <ion-label class="itemText">Persona</ion-label>
+        </div>
+      </ion-button>
+      <ion-button fill="outline" class="btn" (click)="presentAlertClinica()">
+        <div class="btnitems">
+          <ion-img src="assets/img/veterinario.png"></ion-img>
+          <ion-label class="itemText">Clinica</ion-label>
+        </div>
+      </ion-button>
+    </ion-label>
+  </form>
+</ion-content>

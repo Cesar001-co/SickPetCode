@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateEmail } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class UserService {
+    private objectSourse = new BehaviorSubject<any>({});
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    $getObjectSourse = this.objectSourse.asObservable();
 
     constructor(private auth: Auth, private firestore: AngularFirestore) { }
 
@@ -31,4 +35,7 @@ export class UserService {
         }
     }
 
+    sendObjectSourse(data: any){
+        this.objectSourse.next(data);
+    }
 }

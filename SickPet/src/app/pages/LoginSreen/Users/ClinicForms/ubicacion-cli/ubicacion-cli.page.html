@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="close-outline" (click)="cancelAlert()"></ion-icon>
+      <!-- <ion-back-button icon="close-outline" ></ion-back-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <div class="flexcenter">
+      <h1>Datos de la Clinica</h1>
+      <p>Ingrese los datos de la clinica</p>
+    </div>
+
+    <ion-list>
+      <ion-item lines="none" class="input-container">
+        <ion-select interface="popover" placeholder="Pais">
+          <ion-select-option value="apples">Colombia</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none" class="input-container">
+        <ion-select interface="popover" placeholder="Departamento">
+          <ion-select-option value="apples">Cauca</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none" class="input-container">
+        <ion-select interface="popover" placeholder="Ciudad">
+          <ion-select-option value="apples">Popayan</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

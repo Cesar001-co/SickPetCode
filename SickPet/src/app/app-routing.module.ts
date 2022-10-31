@@ -25,6 +25,23 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
+  {
+    path: 'user-tipes',
+    loadChildren: () => import('./pages/LoginSreen/Users/user-tipes/user-tipes.module').then( m => m.UserTipesPageModule)
+  },  {
+    path: 'datos-cli',
+    loadChildren: () => import('./pages/LoginSreen/Users/ClinicForms/datos-cli/datos-cli.module').then( m => m.DatosCliPageModule)
+  },
+  {
+    path: 'ubicacion-cli',
+    loadChildren: () => import('./pages/LoginSreen/Users/ClinicForms/ubicacion-cli/ubicacion-cli.module').then( m => m.UbicacionCliPageModule)
+  },
+  {
+    path: 'services-cli',
+    loadChildren: () => import('./pages/LoginSreen/Users/ClinicForms/services-cli/services-cli.module').then( m => m.ServicesCliPageModule)
+  },
+
+
 ];
 
 @NgModule({

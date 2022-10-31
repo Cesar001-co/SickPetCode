@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="close-outline" (click)="cancelAlert()"></ion-icon>
+      <!-- <ion-back-button icon="close-outline" ></ion-back-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createCli">
+    <div class="flexcenter">
+      <h1>Datos de la Clinica</h1>
+      <p>Ingrese los datos de la clinica</p>
+    </div>
+    <!-- NombreClinica input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Nombre</ion-label>
+      <ion-input maxlength="14" type="text" placeholder="Nombre" [clearInput]="true" formControlName="nombreCli"></ion-input>
+      <!-- Validator message NombreClinica -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createCli.get('nombreCli').touched && createCli.get('nombreCli').errors?.required">
+        Nombre clicia obligatorio</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createCli.get('nombreCli').errors?.minlength">
+        Min 2 caracteres</ion-note>
+    </ion-item>
+
+    <!-- NIT/CC input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">NIT/CC</ion-label>
+      <ion-input maxlength="14" type="text" placeholder="1 1 1 0 4 7 8" [clearInput]="true" formControlName="nit"></ion-input>
+      <!-- Validator message NIT/CC -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createCli.get('nit').touched && createCli.get('nit').errors?.required">
+        NIT/CC obligatorio</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createCli.get('nit').errors?.minlength">
+        Min 5 caracteres</ion-note>
+    </ion-item>
+
+    <!-- Numero contacto 1 input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Contacto clinica 1</ion-label>
+      <ion-input minlength="6" maxlength="14" type="tel" [clearInput]="true" formControlName="numCelCli"></ion-input>
+      <!-- Validator message contacto -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createCli.get('numCelCli').touched && createCli.get('numCelCli').errors?.required">
+        Numero de contacto obligatorio</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createCli.get('numCelCli').errors?.minlength">
+        Min 7 caracteres</ion-note>
+    </ion-item>
+    
+    <!-- Numero contacto input -->
+    <ion-item lines="none" class="input-container">
+      <ion-label class="inputText" position="floating">Contacto clinica 2 (opcional)</ion-label>
+      <ion-input minlength="7" maxlength="14" type="tel" [clearInput]="true" formControlName="numCelCliOp"></ion-input>
+    </ion-item>
+    
+    <!-- siguiente btn -->
+    <ion-label class="siguiente">
+      <ion-button class="btn Siguiente" mode="ios" [disabled]="!createCli.valid" (click)="btnNext()">Siguiente</ion-button>
+    </ion-label>
+  </form>
+</ion-content>
