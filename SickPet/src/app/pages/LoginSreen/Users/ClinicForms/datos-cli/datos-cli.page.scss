@@ -6,7 +6,7 @@ ion-toolbar {
   --ion-toolbar-background: var(--ion-color-myColor-contrast);
 }
 
-ion-icon {
+.iconClose {
   color: var(--ion-color-myColor);
   --ionicon-stroke-width: 50px;
   padding: 0 13px;
@@ -78,6 +78,19 @@ ion-note {
 
 ion-label {
   font-family: Segoe UI;
+}
+
+ion-button {
+  font-family: Segoe UI;
+}
+
+.btnUbicacion {
+  color: var(--ion-color-myColor);
+
+  --border-radius: 40px;
+  --border-color: var(--ion-color-myColor);
+  --border-style: solid;
+  --border-width: 2px;
 }
 
 .siguiente {

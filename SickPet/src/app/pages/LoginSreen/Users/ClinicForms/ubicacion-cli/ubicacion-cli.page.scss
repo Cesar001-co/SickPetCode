@@ -1,0 +1,23 @@
+#map{
+  height: 100%;
+}
+
+.flex{
+  position: fixed;
+  bottom: 10px;
+}
+
+.chip{
+  background: var(--ion-color-myColor);
+
+  font-family: Segoe UI;
+  font-size: 20px;
+  color: var(--ion-color-myColor-contrast);
+  
+  height: 40px;
+}
+
+ion-icon{
+  color: var(--ion-color-myColor-contrast);
+  --ionicon-stroke-width: 50px;
+}

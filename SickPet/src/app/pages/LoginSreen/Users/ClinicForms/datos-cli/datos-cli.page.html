@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-icon name="close-outline" (click)="cancelAlert()"></ion-icon>
+      <ion-icon name="close-outline" (click)="cancelAlert()" class="iconClose"></ion-icon>
       <!-- <ion-back-button icon="close-outline" ></ion-back-button> -->
     </ion-buttons>
   </ion-toolbar>
@@ -55,6 +55,16 @@
       <ion-input minlength="7" maxlength="14" type="tel" [clearInput]="true" formControlName="numCelCliOp"></ion-input>
     </ion-item>
     
+    <div class="flexcenter">
+      <h1>Ubicacion</h1>
+      <p>Ingrese la ubicacion de la clinica</p>
+    </div>
+
+    <ion-button fill="outline" class="btnUbicacion" [disabled]="!createCli.valid" (click)="addDirection()">
+      <ion-icon slot="end" name="locate-outline" class="iconUbicacion"></ion-icon>
+      Selecionar ubicacion
+    </ion-button>
+
     <!-- siguiente btn -->
     <ion-label class="siguiente">
       <ion-button class="btn Siguiente" mode="ios" [disabled]="!createCli.valid" (click)="btnNext()">Siguiente</ion-button>

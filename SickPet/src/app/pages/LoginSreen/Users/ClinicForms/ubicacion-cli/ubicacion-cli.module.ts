@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,9 +13,9 @@ import { UbicacionCliPage } from './ubicacion-cli.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    UbicacionCliPageRoutingModule,
-    ReactiveFormsModule
+    UbicacionCliPageRoutingModule
   ],
-  declarations: [UbicacionCliPage]
+  declarations: [UbicacionCliPage],
+  exports: [UbicacionCliPage]
 })
 export class UbicacionCliPageModule {}

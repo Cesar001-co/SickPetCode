@@ -1,9 +1,36 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>ServicesCli</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="close-outline" (click)="cancelAlert()" class="iconClose"></ion-icon>
+      <!-- <ion-back-button icon="close-outline" ></ion-back-button> -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="fle">
+    <div class="flexcenter">
+      <h1>Servicios</h1>
+      <p>Elige los servicios que le vas a ofrecer a tus clientes.</p>
+    </div>
+  </div>
+  <div class="fleitems">
+    <ion-item lines="none" class="input-container" *ngFor="let servicios of servicesList">
+      <ion-checkbox slot="start" [value]="servicios" (ionChange)="onchange()" [(ngModel)]="servicios.isselected">
+      </ion-checkbox>
+      <ion-img src="assets/materialapp/{{servicios.service}}.png" class="cont"></ion-img>
+      <ion-label class="checknboxText">{{servicios.service}}</ion-label>
+      <ion-input maxlength="9" type="number" placeholder="Precio" [clearInput]="true" [(ngModel)]="servicios.precio"
+        [disabled]="!servicios.isselected" slot="end">$</ion-input>
+    </ion-item>
 
+    <!-- <ion-label>
+      current values: {{serviciosPrecioList | json}}
+    </ion-label> -->
+
+    <!-- siguiente btn -->
+    <ion-label class="siguiente">
+      <ion-button class="btn Siguiente" mode="ios" [disabled]="serviciosPrecioList.length === 0" (click)="agregaClinica()">Finalizar</ion-button>
+    </ion-label>
+  </div>
 </ion-content>

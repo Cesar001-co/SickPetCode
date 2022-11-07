@@ -30,7 +30,8 @@ export class UserTipesPage implements OnInit {
     email: null,
     numDoc: null,
     numCon: null,
-    perfil: null
+    perfil: null,
+    mascota: [null],
   };
 
   constructor(private router: Router, private alertController: AlertController, private userService: UserService) {
