@@ -2,8 +2,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 import { Plugins } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const { Geolocation } = Plugins;
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 // eslint-disable-next-line no-var
 declare var google: any;
 
@@ -32,7 +31,7 @@ export class UbicacionCliPage implements OnInit {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private geolocation: Geolocation) { }
 
   ionViewDidEnter() {
     this.showMap();
@@ -99,7 +98,7 @@ export class UbicacionCliPage implements OnInit {
   async mylocantion() {
     console.log('mylocantion() click');
 
-    Geolocation.getCurrentPosition().then((res) => {
+    this.geolocation.getCurrentPosition().then((res) => {
       console.log('mylocation() get');
       const position = {
         lat: res.coords.latitude,
