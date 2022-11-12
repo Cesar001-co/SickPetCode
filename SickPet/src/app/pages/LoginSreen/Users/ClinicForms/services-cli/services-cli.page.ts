@@ -31,7 +31,7 @@ export class ServicesCliPage implements OnInit {
       lat: '',
       lng: ''
     },
-    serviciosClinica: []
+    serviciosClinica: null
   };
 
   userData: UserReg = {
@@ -42,7 +42,7 @@ export class ServicesCliPage implements OnInit {
     numDoc: null,
     numCon: null,
     perfil: null,
-    mascota: [null],
+    mascota: null,
   };
 
   datosClinica: UserClinica = {

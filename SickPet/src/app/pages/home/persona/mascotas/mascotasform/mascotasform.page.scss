@@ -1,0 +1,134 @@
+ion-content {
+  --background: var(--ion-color-myColor-contrast);
+}
+
+ion-toolbar {
+  --ion-toolbar-background: var(--ion-color-myColor-contrast);
+}
+
+ion-back-button::part(icon) {
+  color: var(--ion-color-myColor);
+  font-size: 30px;
+  padding: 0;
+}
+
+form {
+  padding: 0px 43px 0px 43px;
+  display: flex;
+  flex-direction: column;
+
+  color: black;
+}
+
+h3 {
+  font-family: Segoe UI;
+  font-size: 20;
+  margin: 0;
+}
+
+.input {
+  --background: var(--ion-color-myColor-contrast);
+
+  margin-top: 21px;
+  height: 66px;
+
+  border: 1px solid #CDD4D9;
+  border-radius: 8px;
+
+  transition: .3s all;
+}
+
+.textarea {
+  --background: var(--ion-color-myColor-contrast);
+
+  margin-top: 21px;
+  height: 225px;
+
+  border: 1px solid #CDD4D9;
+  border-radius: 8px;
+
+  transition: .3s all;
+}
+
+.select {
+  --background: var(--ion-color-myColor-contrast);
+
+  margin-top: 21px;
+  height: 50px;
+
+  border: 1px solid #CDD4D9;
+  border-radius: 8px;
+
+  transition: .3s all;
+}
+
+.container:hover {
+  border-color: var(--ion-color-myColor);
+}
+
+ion-item {
+  font-family: Segoe UI;
+}
+
+ion-item.item-has-focus>ion-label {
+  color: var(--ion-color-myColor) !important;
+}
+
+.inputText {
+  color: #CDD4D9;
+}
+
+ion-input {
+  color: black;
+}
+
+ion-note {
+  position: relative;
+  bottom: 15px;
+}
+
+ion-label {
+  font-family: Segoe UI;
+}
+
+.agregar {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  height: 70px;
+  width: 332px;
+  margin-bottom: 12px;
+
+  --border-radius: 40px;
+  --border-color: var(--ion-color-myColor-contrast): --border-style: solid;
+  --border-width: 2px;
+
+  --color: var(--ion-color-myColor-contrast);
+  font-family: Segoe UI;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.Agregar {
+  --color: var(--ion-color-myColor-contrast);
+  --color-activated: var(--ion-color-myColor);
+
+  --background: var(--ion-color-myColor);
+  --background-activated: var(--ion-color-myColor-contrast);
+}
+
+ion-select {
+  width: 100%;
+}
+
+ion-select::part(text) {
+  color: var(--ion-color-myColor);
+}
+
+ion-select::part(icon) {
+  color: var(--ion-color-myColor);
+  opacity: 1;
+}

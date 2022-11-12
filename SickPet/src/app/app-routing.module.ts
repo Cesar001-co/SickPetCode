@@ -22,10 +22,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/LoginSreen/new-password/new-password.module').then(m => m.NewPasswordPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
-  },
-  {
     path: 'user-tipes',
     loadChildren: () => import('./pages/LoginSreen/Users/user-tipes/user-tipes.module').then(m => m.UserTipesPageModule)
   },
@@ -42,6 +38,31 @@ const routes: Routes = [
     loadChildren: () => import('./pages/LoginSreen/Users/ClinicForms/ubicacion-cli/ubicacion-cli.module')
       .then(m => m.UbicacionCliPageModule)
   },
+  {
+    path: 'home-persona/:id',
+    loadChildren: () => import('./pages/home/persona/home-persona/home-persona.module').then(m => m.HomePersonaPageModule)
+  },
+  {
+    path: 'home-clinica/:id',
+    loadChildren: () => import('./pages/home/clinica/home-clinica/home-clinica.module').then(m => m.HomeClinicaPageModule)
+  },
+  {
+    path: 'mascotas-user/:id',
+    loadChildren: () => import('./pages/home/persona/mascotas/mascotas-user/mascotas-user.module').then(m => m.MascotasUserPageModule)
+  },
+  {
+    path: 'registrarmascota/:id',
+    loadChildren: () => import('./pages/home/persona/mascotas/registrarmascota/registrarmascota.module')
+      .then(m => m.RegistrarmascotaPageModule)
+  },
+  {
+    path: 'mascotasform/:idm/:idu',
+    loadChildren: () => import('./pages/home/persona/mascotas/mascotasform/mascotasform.module').then(m => m.MascotasformPageModule)
+  },
+
+
+
+
 
 
 

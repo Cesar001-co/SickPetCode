@@ -14,6 +14,6 @@ export class RegisterConfiPage implements OnInit {
   }
 
   gotoLogin(){
-    this.router.navigate(['/ingresar']);
+    this.router.navigate(['/login']);
   }
 }

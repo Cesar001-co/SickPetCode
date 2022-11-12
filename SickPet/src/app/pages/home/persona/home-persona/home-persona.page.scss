@@ -1,0 +1,22 @@
+ion-content {
+  --background: var(--ion-color-myColor-contrast);
+}
+
+.btnToolBar {
+  position: fixed;
+
+  --background: var(--ion-color-myColor);
+
+  --border-radius: 50%;
+
+  width: 49px;
+  height: 49px;
+
+  top: 2px;
+  left: 2px;
+}
+
+.iconoMenu {
+  font-size: 64px;
+  --ionicon-stroke-width: 50px;
+}

@@ -31,7 +31,7 @@ export class UserTipesPage implements OnInit {
     numDoc: null,
     numCon: null,
     perfil: null,
-    mascota: [null],
+    mascota: null,
   };
 
   constructor(private router: Router, private alertController: AlertController, private userService: UserService) {
@@ -59,7 +59,7 @@ export class UserTipesPage implements OnInit {
       message: 'Algo mal ocurrio, verifica tu email',
       buttons: ['OK']
     });
-    this.router.navigate(['/sigin']);
+    this.router.navigate(['/signin']);
     await alert.present();
   }
   // ==================================================

@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goToHome()">
+      <ion-icon class="arrowBack" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div >
+    <h1>Lista Mascotas</h1>
+    <h3 *ngIf="mascotas.length === 0" >No se encuentran peludos registrados :'(</h3>
+
+    <!-- mascotas -->
+    <ion-list>
+      <ion-item-sliding *ngFor="let masc of mascotas">
+        <ion-item-options side="start">
+          <ion-item-option expandable (click)="goToSettings(masc.idM)">
+            <ion-icon slot="top" name="archive"></ion-icon>
+            Modificar
+          </ion-item-option>
+        </ion-item-options>
+    
+        <ion-item lines="none" class="btnslide-item">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-label class="alingcenter">{{masc.nombreMasc}}</ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+    
+        <ion-item-options side="end">
+          <ion-item-option color="danger" expandable (click)="deleteActionSheet(masc.nombreMasc, masc.idM)">
+            <ion-icon slot="top" name="trash"></ion-icon>
+            Eliminar
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <!-- btn agregar -->
+    <ion-fab>
+      <ion-fab-button class="btnToolBar" (click)="goToAdd()">
+        <ion-icon name="add-outline" class="iconoadd"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>

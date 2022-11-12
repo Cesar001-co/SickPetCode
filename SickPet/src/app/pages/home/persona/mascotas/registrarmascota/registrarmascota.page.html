@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createmascota">
+    <h3>Agregar mascota</h3>
+
+    <ion-item lines="none" class="select container">
+      <ion-select placeholder="Tipo de mascota" mode="ios" [interfaceOptions]="customAlertOptions" (ionChange)="handleChange($event)">
+        <ion-select-option value="apples" *ngFor="let tipes of tipos" [value]="tipes">
+          {{tipes.tipomascota}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Nombre Mascota input -->
+    <ion-item lines="none" class="input container">
+      <ion-label class="inputText" position="floating">Nombre (mascota)</ion-label>
+      <ion-input type="text" maxlength="18" placeholder="Nombre" [clearInput]="true" formControlName="nombreMasc"></ion-input>
+      <!-- Validator message Nombre -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createmascota.get('nombreMasc').touched && createmascota.get('nombreMasc').errors?.required">
+        Nombre obligatorio</ion-note>
+      <ion-note slot="error" color="nombreMasc" *ngIf="createmascota.get('nombreMasc').errors?.minlength">
+        Min 2 caracteres</ion-note>
+    </ion-item>
+
+    <ion-item lines="none" class="input container">
+      <ion-label class="inputText" position="floating">Edad (mascota)</ion-label>
+      <ion-input type="number" placeholder="Edad" [clearInput]="true" formControlName="edad"></ion-input>     
+      <!-- Validator message Nombre -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createmascota.get('edad').touched && createmascota.get('edad').errors?.required">
+        Edad obligatoria</ion-note>
+    </ion-item>
+
+    <ion-item lines="none" class="input container">
+      <ion-label class="inputText" position="floating">Raza (mascota)</ion-label>
+      <ion-input type="text" maxlength="18" placeholder="Cocker, Siberiano, Criollo, Bengali, ..." [clearInput]="true" formControlName="raza"></ion-input>
+      <!-- Validator message Nombre -->
+      <ion-note slot="error" color="danger"
+        *ngIf="createmascota.get('raza').touched && createmascota.get('raza').errors?.required">
+        Raza es obligatoria</ion-note>
+      <ion-note slot="error" color="danger" *ngIf="createmascota.get('raza').errors?.minlength">
+        Min 2 caracteres</ion-note>
+    </ion-item>
+
+    <ion-item lines="none" class="textarea container">
+      <ion-label class="inputText" position="stacked">Informacion adicional (opcional)</ion-label>
+      <ion-textarea [autoGrow]="true" placeholder="Alergias, discapacidades, enfermedades, ..." formControlName="inf"></ion-textarea>
+    </ion-item>
+
+    <ion-label class="agregar">
+      <ion-button class="btn Agregar" mode="ios" [disabled]="!createmascota.valid" (click)="confirmAlert()">Registrar</ion-button>
+    </ion-label>
+  </form>
+</ion-content>

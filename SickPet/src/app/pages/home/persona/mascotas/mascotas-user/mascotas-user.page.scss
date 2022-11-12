@@ -1,0 +1,84 @@
+ion-content {
+  --background: var(--ion-color-myColor-contrast);
+}
+
+ion-toolbar {
+  --ion-toolbar-background: var(--ion-color-myColor-contrast);
+}
+
+.arrowBack {
+  color: var(--ion-color-myColor);
+  font-size: 30px;
+  padding-left: 13px;
+}
+
+.btnToolBar {
+  position: fixed;
+
+  --background: var(--ion-color-myColor);
+
+  width: 69px;
+  height: 69px;
+
+  bottom: 15px;
+  right: 15px;
+}
+
+.iconoadd {
+  font-size: 35px;
+  --ionicon-stroke-width: 50px;
+}
+
+div {
+  padding: 0px 43px 0px 43px;
+  display: flex;
+  flex-direction: column;
+
+  color: black;
+}
+
+h3 {
+  font-family: Segoe UI;
+  font-size: 20px;
+  margin: 0;
+}
+
+.btnslide-item {
+  --background: var(--ion-color-myColor-contrast);
+
+  height: 52px;
+
+  border: 2px solid #707070;
+  border-radius: 20px;
+}
+
+ion-item-sliding {
+  margin-top: 18px;
+}
+
+ion-item-option {
+  border-radius: 20px;
+}
+
+ion-item,
+ion-label {
+  font-family: Segoe UI;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.alingcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: var(--ion-color-myColor);
+  
+  font-family: Segoe UI;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

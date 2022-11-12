@@ -14,6 +14,9 @@ export class IngresarPage implements OnInit {
 
   form: FormGroup;
 
+  rol = '';
+  uid = '';
+
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService,
     private alertController: AlertController) {
     this.form = new FormGroup({
@@ -27,11 +30,29 @@ export class IngresarPage implements OnInit {
   }
 
   async onSubmit() {
-    this.userService.login(this.form.value)
-      .then(response => {
-        this.router.navigate(['/home']);
-      })
-      .catch(error => this.errorAlert());
+    const res = await this.userService.login(this.form.value)
+      .catch(error => {
+        this.errorAlert();
+        console.log('error');
+      });
+    if (res) {
+      const id = res.user.uid;
+      this.uid = id;
+      console.log('uID: ', id);
+
+      this.userService.getDatosUsuario(id).subscribe(data => {
+        this.rol = data.perfil;
+        this.redirectUser();
+      });
+    }
+  }
+
+  redirectUser() {
+    if (this.rol === 'per') {
+      this.router.navigate(['/home-persona',this.uid]);
+    } else {
+      this.router.navigate(['/home-clinica',this.uid]);
+    }
   }
 
   gotoNewPassword() {
