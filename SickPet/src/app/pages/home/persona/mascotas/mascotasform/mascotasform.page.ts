@@ -19,15 +19,13 @@ export class MascotasformPage implements OnInit {
   createmascota: FormGroup;
   mascotaData: MascotaData = {
     uID: '',
-    mascotaTipe: {
-      idTipo: '',
-      tipomascota: ''
-    },
+    tipomascota: '',
     nombreMasc: '',
     edad: '',
     raza: '',
     inf: ''
   };
+  values: any;
 
   customAlertOptions = {
     header: 'Tipo de mascota',
@@ -41,10 +39,7 @@ export class MascotasformPage implements OnInit {
     private router: Router,
     private fb: FormBuilder) {
     this.createmascota = this.fb.group({
-      mascotaTipe: {
-        idTipo: [''],
-        tipomascota: ['']
-      },
+      tipomascota: [''],
       nombreMasc: ['', [Validators.required, Validators.minLength(2)]],
       edad: ['', [Validators.required]],
       raza: ['', [Validators.required, Validators.minLength(2)]],
@@ -154,12 +149,9 @@ export class MascotasformPage implements OnInit {
 
   getMascotaData() {
     this.mascotasService.getMascotaData(this.idM).subscribe(data => {
-      //this.values = data.payload.data().mascotaTipe;
+      this.values = data.payload.data().tipomascota;
       this.createmascota.setValue({
-        mascotaTipe: {
-          idTipo: data.payload.data().mascotaTipe.idTipo,
-          tipomascota: data.payload.data().mascotaTipe.tipomascota
-        },
+        tipomascota: this.values,
         nombreMasc: data.payload.data().nombreMasc,
         edad: data.payload.data().edad,
         raza: data.payload.data().raza,
@@ -170,8 +162,9 @@ export class MascotasformPage implements OnInit {
 
   modificarMascota() {
     this.mascotaData.uID = this.uid;
-    this.mascotaData.mascotaTipe = this.selectmascota;
-    if (this.mascotaData.mascotaTipe === undefined) {
+    this.mascotaData.tipomascota = ''+this.selectmascota;
+    console.log(this.selectmascota);
+    if (this.mascotaData.tipomascota === undefined) {
       this.tipoErrAlert();
     } else {
       this.mascotaData.nombreMasc = this.createmascota.get('nombreMasc').value;

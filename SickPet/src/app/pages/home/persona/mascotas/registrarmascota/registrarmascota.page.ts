@@ -19,10 +19,7 @@ export class RegistrarmascotaPage implements OnInit {
   createmascota: FormGroup;
   mascotaData: MascotaData = {
     uID: '',
-    mascotaTipe: {
-      idTipo: '',
-      tipomascota: ''
-    },
+    tipomascota: '',
     nombreMasc: '',
     edad: '',
     raza: '',
@@ -53,11 +50,6 @@ export class RegistrarmascotaPage implements OnInit {
     private router: Router,
     private fb: FormBuilder) {
     this.createmascota = this.fb.group({
-      uID: [''],
-      mascota: {
-        idTipo: [''],
-        tipomascota: ['']
-      },
       nombreMasc: ['', [Validators.required, Validators.minLength(2)]],
       edad: ['', [Validators.required]],
       raza: ['', [Validators.required, Validators.minLength(2)]],
@@ -160,8 +152,8 @@ export class RegistrarmascotaPage implements OnInit {
 
   async agregarMascota() {
     this.mascotaData.uID = this.uid;
-    this.mascotaData.mascotaTipe = this.selectmascota;
-    if (this.mascotaData.mascotaTipe === undefined) {
+    this.mascotaData.tipomascota = this.selectmascota.tipomascota;
+    if (this.mascotaData.tipomascota === undefined) {
       this.tipoErrAlert();
     } else {
       this.mascotaData.nombreMasc = this.createmascota.get('nombreMasc').value;

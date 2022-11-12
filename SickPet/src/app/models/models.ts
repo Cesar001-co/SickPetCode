@@ -35,10 +35,7 @@ export interface UserClinica {
 
 export interface MascotaData {
     uID: string;
-    mascotaTipe: {
-        idTipo: string;
-        tipomascota: string;
-    };
+    tipomascota: string;
     nombreMasc: string;
     edad: string;
     raza: string;

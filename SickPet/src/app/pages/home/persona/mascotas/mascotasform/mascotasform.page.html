@@ -12,8 +12,8 @@
 
     <ion-item lines="none" class="select container">
       <ion-select placeholder="Tipo de mascota" mode="ios" [interfaceOptions]="customAlertOptions"
-        (ionChange)="handleChange($event)" formControlName="mascotaTipe">
-        <ion-select-option *ngFor="let tipes of tipos" [value]="tipes">
+        (ionChange)="handleChange($event)" [(ngModel)]="values" [ngModelOptions]="{standalone: true}">
+        <ion-select-option *ngFor="let tipes of tipos" [value]="tipes.tipomascota">
           {{tipes.tipomascota}}
         </ion-select-option>
       </ion-select>
