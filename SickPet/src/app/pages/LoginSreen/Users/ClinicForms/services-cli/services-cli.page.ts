@@ -48,6 +48,7 @@ export class ServicesCliPage implements OnInit {
   datosClinica: UserClinica = {
     uID: null,
     nombreCli: null,
+    calificacion: null,
     nit: null,
     numCelCli: null,
     numCelCliOp: null,
@@ -193,6 +194,7 @@ export class ServicesCliPage implements OnInit {
       this.datosClinica.numCelCliOp = this.datos.numCelCliOp;
       this.datosClinica.ubicacion = this.datos.ubicacion;
       this.datosClinica.serviciosClinica = this.datos.serviciosClinica;
+      this.datosClinica.calificacion = '0.0';
 
       console.log(this.datosClinica);
       this.clinicaService.registrarClinicaCollection(this.datosClinica, id);
@@ -206,7 +208,6 @@ export class ServicesCliPage implements OnInit {
       this.services = [];
       data.forEach((element: any) => {
         this.services.push({
-          id: element.payload.doc.id,
           ...element.payload.doc.data(),
           precio: this.precio,
           isselected: false,

@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Plugins } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';

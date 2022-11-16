@@ -16,6 +16,7 @@ export interface UserReg {
 export interface UserClinica {
     uID: string;
     nombreCli: string;
+    calificacion: string;
     nit: string;
     numCelCli: string;
     numCelCliOp: string;
@@ -25,7 +26,6 @@ export interface UserClinica {
     };
     serviciosClinica: [
         {
-            id: string;
             precio: number;
             service: string;
             isselected: boolean;
@@ -45,4 +45,64 @@ export interface MascotaData {
 export interface TipoMascota {
     idTipo: string;
     tipomascota: string;
+}
+
+export interface Solicitud {
+    uID: string;
+    idC: string;
+    estadoSol: boolean;
+    end: boolean;
+    service: string;
+    hora: string;
+    infoSolicitud: string;
+    mascota: {
+        nombreMasc: string;
+        edad: string;
+        raza: string;
+        info: string;
+        tipomascota: string;
+    };
+    usuario: {
+        nombre: string;
+        numCel: string;
+    };
+    ubicacion: {
+        lat: string;
+        lng: string;
+    };
+}
+
+export interface SolClinica {
+    idC: string;
+    nombreCli: string;
+    numCelCli: string;
+    numCelCliOp: string;
+    calificacion: string;
+    ubicacion: {
+        lat: string;
+        lng: string;
+    };
+    serviciosClinica: [
+        {
+            precio: number;
+            service: string;
+        }
+    ];
+}
+
+export interface SolClinicafil {
+    idC: string;
+    nombreCli: string;
+    numCelCli: string;
+    numCelCliOp: string;
+    calificacion: string;
+    ubicacion: {
+        lat: string;
+        lng: string;
+    };
+    serviciosClinica: {
+        precio: number;
+        service: string;
+    }
+    ;
 }

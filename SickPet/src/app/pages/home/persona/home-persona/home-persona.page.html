@@ -5,19 +5,130 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-item button (click)="goToRegisterMasc()">
-      <ion-icon name="accessibility-outline" slot="start"></ion-icon>
+    <ion-item button lines="none" (click)="goToHomeUser()">
+      <ion-icon src="assets/icons/homeicon.svg" slot="start"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none" (click)="goToRegisterMasc()">
+      <ion-icon src="assets/icons/mascotasIcon.svg" slot="start"></ion-icon>
       <ion-label>Mascotas</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none">
+      <ion-icon src="assets/icons/ajustesicon.svg" slot="start"></ion-icon>
+      <ion-label>Ajustes</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none">
+      <ion-icon src="assets/icons/ayudaICon.svg" slot="start"></ion-icon>
+      <ion-label>Soporte</ion-label>
     </ion-item>
   </ion-content>
 </ion-menu>
 
 <div class="ion-page" id="main-content">
-  <ion-content class="ion-padding">
+  <ion-content>
     <ion-menu-toggle>
       <ion-button size="small" shape="circle" class="btnToolBar">
         <ion-icon size="large" class="iconoMenu" name="menu-outline"></ion-icon>
       </ion-button>
     </ion-menu-toggle>
+
+    <div #map></div>
+
+    <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.85" [breakpoints]="[0, 0.3, 0.5, 0.85, 1]"
+      [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-content>
+          <div class="flexcenter mod">
+            <ion-label class="labeltext"> Buscando en tu zona ...</ion-label>
+            <ion-list>
+
+              <ion-item lines="none" class="ListaClinica" *ngFor="let clibyService of clinicabyServiciosFilt">
+                <ion-label class="nomPre">
+                  <h2 class="nombrecli">{{clibyService.nombreCli}}</h2>
+                  <p class="precioSer">{{clibyService.serviciosClinica.precio | currency}}</p>
+                </ion-label>
+                <ion-item lines="none" class="calitem">
+                  <ion-icon name="star" class="icon"></ion-icon>
+                  <h2 class="calificacion">{{clibyService.calificacion}}</h2>
+                </ion-item>
+                <ion-button class="btnver" (click)="goTolocalizacion(clibyService.idC)"> Ver </ion-button>
+              </ion-item>
+            </ion-list>
+          </div>
+
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    <!--  -->
+
+    <div class="flota">
+      <div *ngIf="lookSolicitud === true">
+        <ion-item lines="none" class="slidesContainer">
+
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-slides [options]="slidesOptions">
+            <ion-slide *ngFor="let serv of services">
+
+              <ion-button class="btnServicio serv{{serv.service}}" id="{{serv.service}}" mode="ios"
+                (click)="getSelectedService(serv.service)">
+                <div class="btnitems">
+                  <ion-img src="assets/materialapp/{{serv.service}}.png"></ion-img>
+                  <ion-label class="itemText">{{serv.service}}</ion-label>
+                </div>
+              </ion-button>
+
+            </ion-slide>
+          </ion-slides>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+
+        </ion-item>
+        <form [formGroup]="solicform" class="flexcenter">
+
+          <ion-item lines="none" class="select container">
+            <ion-select placeholder="Seleccione mascota" mode="ios" (ionChange)="handleChange($event)">
+              <ion-select-option value="apples" *ngFor="let masc of mascotas" [value]="masc">
+                {{masc.nombreMasc}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none" class="textarea container">
+            <ion-label class="inputText" position="floating">Comentarios y deseos</ion-label>
+            <ion-input maxlength="70" placeholder="" formControlName="infoSolicitud"></ion-input>
+          </ion-item>
+
+          <ion-label class="agregar">
+            <ion-button class="btn Agregar" mode="ios" [disabled]="!solicform.valid" id="open-modal"
+              (click)="geneararSolicitud()">Buscar Clinicas</ion-button>
+          </ion-label>
+
+        </form>
+      </div>
+      <div *ngIf="lookSolicitud === false">
+        <ion-item lines="none" class="clinciaInfo">
+          <ion-label>
+            <h1>Mascotylove</h1>
+            <h3>Contacto: </h3>
+            <p>+57 3112426884</p>
+            <p>8336167</p>
+          </ion-label>
+          <ion-item lines="none" class="calitem">
+            <ion-icon name="star" class="icon"></ion-icon>
+            <h2 class="calificacion">0.0</h2>
+          </ion-item>
+        </ion-item>
+        <ion-label class="agregar">
+          <ion-button class="btn Agregar" mode="ios" [disabled]="!solicform.valid" (click)="goToInicio()">Cancelar
+          </ion-button>
+        </ion-label>
+        <ion-label class="agregar">
+          <ion-button class="btn Agregar" mode="ios" [disabled]="!solicform.valid" (click)="confirmAlert()">Generar solicitud
+          </ion-button>
+        </ion-label>
+      </div>
+    </div>
   </ion-content>
 </div>
