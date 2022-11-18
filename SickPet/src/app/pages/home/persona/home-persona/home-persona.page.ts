@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -8,12 +8,25 @@ import { ServiciosClinica } from 'src/app/services/serviciosCli.service';
 import { ServiciosSolicitudes } from 'src/app/services/solicitudes.service';
 import { UserService } from 'src/app/services/user.service';
 
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+// eslint-disable-next-line no-var
+declare var google: any;
+
 @Component({
   selector: 'app-home-persona',
   templateUrl: './home-persona.page.html',
   styleUrls: ['./home-persona.page.scss'],
 })
 export class HomePersonaPage implements OnInit {
+
+  map: any;
+  marker: any;
+  infowindow: any;
+  positionSet: any;
+  myUbicacion: userLocation;
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
 
   uid: any;
   mascotas: MascotaData[] = [];
@@ -79,7 +92,8 @@ export class HomePersonaPage implements OnInit {
     private clinicaService: ServiciosClinica,
     private mascotasService: ServiciosMascotas,
     private fb: FormBuilder,
-    private solicitudService: ServiciosSolicitudes) {
+    private solicitudService: ServiciosSolicitudes,
+    private geolocation: Geolocation) {
     this.solicform = this.fb.group({
       infoSolicitud: [''],
       service: ['', Validators.required],
@@ -88,12 +102,57 @@ export class HomePersonaPage implements OnInit {
   }
 
   ngOnInit() {
+    this.mylocantion();
     this.uid = this.activatedRoute.snapshot.paramMap.get('id');
     console.log('user id', this.uid);
     this.getUserData();
     this.getServiciosClinica();
     this.getMascotas(this.uid);
   }
+
+  //---------------------------------[UBICACION]------------------------------------
+  ionViewDidEnter() {
+    this.showMap();
+  }
+
+  async showMap() {
+
+    const latLng = new google.maps.LatLng(this.myUbicacion.lat, this.myUbicacion.lng);
+    const mapOptions = {
+      center: latLng,
+      zoom: 15,
+      disableDefaultUI: true,
+      clickableIcons: false
+    };
+
+    this.map = new google.maps.Map(this.mapRef.nativeElement, mapOptions);
+    this.marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DORP,
+      //draggable: true,
+      icon: 'assets/icons/Your Location.png'
+    });
+    this.infowindow = new google.maps.InfoWindow();
+    this.addMarker(this.myUbicacion);
+  }
+
+  addMarker(position: any) {
+    const latLng = new google.maps.LatLng(position.lat, position.lng);
+
+    this.marker.setPosition(latLng);
+    this.map.panTo(position);
+    this.myUbicacion = position;
+  }
+
+  async mylocantion() {
+    this.geolocation.getCurrentPosition().then((res) => {
+      this.myUbicacion = {
+        lat: res.coords.latitude,
+        lng: res.coords.longitude
+      };
+    });
+  }
+  //--------------------------------------------------------------------------------
 
   handleChange(ev) {
     this.selectmascota = ev.target.value;
@@ -335,4 +394,10 @@ export class HomePersonaPage implements OnInit {
       // console.log(this.dataSolicitud);
     }
   }
+}
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+interface userLocation {
+  lat: number;
+  lng: number;
 }

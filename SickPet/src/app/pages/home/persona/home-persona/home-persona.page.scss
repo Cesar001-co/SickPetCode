@@ -2,6 +2,10 @@ ion-content {
   --background: var(--ion-color-myColor-contrast);
 }
 
+#map{
+  height: 600px;
+}
+
 .btnToolBar {
   position: fixed;
 
@@ -14,6 +18,20 @@ ion-content {
 
   top: 2px;
   left: 2px;
+}
+
+.btnMylocation {
+  position: fixed;
+
+  --background: var(--ion-color-myColor);
+
+  --border-radius: 50%;
+
+  width: 49px;
+  height: 49px;
+
+  bottom: 390px;
+  right: 2px;
 }
 
 .iconoMenu {
@@ -31,7 +49,6 @@ ion-content {
 
   bottom: 0;
 
-  border: 1px solid;
   border-radius: 15px 15px 0 0;
 }
 
@@ -45,7 +62,6 @@ ion-content {
 
   bottom: 0;
 
-  border: 1px solid;
   border-radius: 15px 15px 0 0;
 }
 

@@ -29,13 +29,19 @@
 
 <div class="ion-page" id="main-content">
   <ion-content>
+    
+
+    <div #map id="map" class="map"></div>
+
     <ion-menu-toggle>
       <ion-button size="small" shape="circle" class="btnToolBar">
         <ion-icon size="large" class="iconoMenu" name="menu-outline"></ion-icon>
       </ion-button>
     </ion-menu-toggle>
 
-    <div #map></div>
+    <ion-button size="small" shape="circle" class="btnMylocation" (click)="mylocantion()">
+      <ion-icon size="large" name="location-sharp" class="iconoMenu"></ion-icon>
+    </ion-button>
 
     <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.85" [breakpoints]="[0, 0.3, 0.5, 0.85, 1]"
       [isOpen]="isModalOpen">
