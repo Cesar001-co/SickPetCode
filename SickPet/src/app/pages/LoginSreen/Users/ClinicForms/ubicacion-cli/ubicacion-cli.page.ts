@@ -95,8 +95,6 @@ export class UbicacionCliPage implements OnInit {
   }
 
   async mylocantion() {
-    console.log('mylocantion() click');
-
     this.geolocation.getCurrentPosition().then((res) => {
       console.log('mylocation() get');
       const position = {

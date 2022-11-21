@@ -58,7 +58,11 @@ const routes: Routes = [
   {
     path: 'mascotasform/:idm/:idu',
     loadChildren: () => import('./pages/home/persona/mascotas/mascotasform/mascotasform.module').then(m => m.MascotasformPageModule)
+  },  {
+    path: 'calificar',
+    loadChildren: () => import('./pages/home/persona/calificar/calificar.module').then( m => m.CalificarPageModule)
   },
+
 
 
 

@@ -48,12 +48,11 @@ export interface TipoMascota {
 }
 
 export interface Solicitud {
-    uID: string;
     idC: string;
     estadoSol: boolean;
     end: boolean;
     service: string;
-    hora: string;
+    hora: Date;
     infoSolicitud: string;
     mascota: {
         nombreMasc: string;
@@ -105,4 +104,10 @@ export interface SolClinicafil {
         service: string;
     }
     ;
+}
+
+export interface Calif {
+    idC: string;
+    uID: string;
+    calificacion: number;
 }

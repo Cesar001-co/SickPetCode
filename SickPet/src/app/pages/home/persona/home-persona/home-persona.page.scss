@@ -6,6 +6,18 @@ ion-content {
   height: 600px;
 }
 
+#indicators {
+  padding: 16px;
+  height: 40%;
+  width: 100%;
+  overflow-y: auto;
+  display: block;
+}
+
+b {
+  color: var(--ion-color-myColor);
+}
+
 .btnToolBar {
   position: fixed;
 

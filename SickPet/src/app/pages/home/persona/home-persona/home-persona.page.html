@@ -29,9 +29,10 @@
 
 <div class="ion-page" id="main-content">
   <ion-content>
-    
+
 
     <div #map id="map" class="map"></div>
+    <div #indicators></div>
 
     <ion-menu-toggle>
       <ion-button size="small" shape="circle" class="btnToolBar">
@@ -49,8 +50,8 @@
         <ion-content>
           <div class="flexcenter mod">
             <ion-label class="labeltext"> Buscando en tu zona ...</ion-label>
+            <ion-label *ngIf="clinicabyServiciosFilt.length === 0" class="labeltext"> <b> No hay clinicas :( </b></ion-label>
             <ion-list>
-
               <ion-item lines="none" class="ListaClinica" *ngFor="let clibyService of clinicabyServiciosFilt">
                 <ion-label class="nomPre">
                   <h2 class="nombrecli">{{clibyService.nombreCli}}</h2>
@@ -60,7 +61,7 @@
                   <ion-icon name="star" class="icon"></ion-icon>
                   <h2 class="calificacion">{{clibyService.calificacion}}</h2>
                 </ion-item>
-                <ion-button class="btnver" (click)="goTolocalizacion(clibyService.idC)"> Ver </ion-button>
+                <ion-button class="btnver" (click)="goTolocalizacion(clibyService)"> Ver </ion-button>
               </ion-item>
             </ion-list>
           </div>
@@ -108,22 +109,23 @@
 
           <ion-label class="agregar">
             <ion-button class="btn Agregar" mode="ios" [disabled]="!solicform.valid" id="open-modal"
-              (click)="geneararSolicitud()">Buscar Clinicas</ion-button>
+              (click)="buscarSolicitud()">Buscar Clinicas</ion-button>
           </ion-label>
 
         </form>
       </div>
-      <div *ngIf="lookSolicitud === false">
+      <!--  -->
+      <div *ngIf="searchSolicitud === true">
         <ion-item lines="none" class="clinciaInfo">
           <ion-label>
-            <h1>Mascotylove</h1>
+            <h1>{{selectedCli.nombreCli}}</h1>
             <h3>Contacto: </h3>
-            <p>+57 3112426884</p>
-            <p>8336167</p>
+            <p>{{selectedCli.numCelCli}}</p>
+            <p *ngIf="selectedCli.numCelCliOp.length > 0">{{selectedCli.numCelCliOp}}</p>
           </ion-label>
           <ion-item lines="none" class="calitem">
             <ion-icon name="star" class="icon"></ion-icon>
-            <h2 class="calificacion">0.0</h2>
+            <h2 class="calificacion">{{selectedCli.calificacion}}</h2>
           </ion-item>
         </ion-item>
         <ion-label class="agregar">
@@ -131,7 +133,37 @@
           </ion-button>
         </ion-label>
         <ion-label class="agregar">
-          <ion-button class="btn Agregar" mode="ios" [disabled]="!solicform.valid" (click)="confirmAlert()">Generar solicitud
+          <ion-button class="btn Agregar" mode="ios" [disabled]="!solicform.valid" (click)="confirmAlert()">Generar
+            solicitud
+          </ion-button>
+        </ion-label>
+      </div>
+      <!--  -->
+      <div *ngIf="solicitudGenerada === true">
+        <ion-item class="clinciaInfo">
+          <ion-label>
+            <h1> <b> {{solicitudCli.nombreCli}} </b> </h1>
+            <h3> <b>Contacto:</b>  </h3>
+            <p>{{solicitudCli.numCelCli}}</p>
+            <p *ngIf="solicitudCli.numCelCliOp.length > 0">{{solicitudCli.numCelCliOp}}</p>
+          </ion-label>
+          <ion-item lines="none" class="calitem">
+            <ion-icon name="star" class="icon"></ion-icon>
+            <h2 class="calificacion">{{solicitudCli.calificacion}}</h2>
+          </ion-item>
+        </ion-item>
+
+        <ion-item >
+          <ion-label>
+            <h3> <b>Servicio:</b>  </h3>
+            <p>{{verifySolocitud.service}}</p>
+            <h3> <b>Mascota:</b>  </h3>
+            <p>{{verifySolocitud.mascota.nombreMasc}}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-label class="agregar">
+          <ion-button class="btn Agregar" mode="ios" (click)="cancelSolAlert()">Cancelar Solicitud
           </ion-button>
         </ion-label>
       </div>
