@@ -15,6 +15,9 @@ import { CalificarPage } from './calificar.page';
     IonicModule,
     CalificarPageRoutingModule
   ],
-  declarations: [CalificarPage]
+  declarations: [CalificarPage],
+  exports: [
+    CalificarPage
+  ]
 })
 export class CalificarPageModule {}

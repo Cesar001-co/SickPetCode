@@ -33,7 +33,7 @@ export class ServiciosSolicitudes {
         return this.firestore.collection('clinicasdb').doc(id).valueChanges();
     }
 
-    calificarClinica(data: any, idC) {
+    calificarClinica(data: any, idC: any) {
         this.calificaciones = [];
         this.firestore.collection('calificacionesdb').add(data).then(dat => {
             this.getCal(idC).subscribe(ref => {
@@ -47,6 +47,7 @@ export class ServiciosSolicitudes {
                 sum = sum + this.calificaciones[index].calificacion;
             }
             const calificacion = sum / this.calificaciones.length;
+            return this.firestore.collection('clinicasdb').doc(idC).set(calificacion);
         });
 
     }

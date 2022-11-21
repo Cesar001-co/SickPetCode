@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calificar',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calificar.page.scss'],
 })
 export class CalificarPage implements OnInit {
+
+  @Input() cal: any;
 
   constructor() { }
 

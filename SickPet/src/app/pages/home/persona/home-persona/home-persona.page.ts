@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { MascotaData, Solicitud, UserReg, SolClinica, SolClinicafil, UserClinica } from 'src/app/models/models';
 import { ServiciosMascotas } from 'src/app/services/mascotas.service';
 import { ServiciosClinica } from 'src/app/services/serviciosCli.service';
@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { BehaviorSubject } from 'rxjs';
+import { CalificarPage } from '../calificar/calificar.page';
 
 declare let google;
 
@@ -123,7 +124,8 @@ export class HomePersonaPage implements OnInit {
     private mascotasService: ServiciosMascotas,
     private fb: FormBuilder,
     private solicitudService: ServiciosSolicitudes,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    private modalControl: ModalController) {
     this.solicform = this.fb.group({
       infoSolicitud: [''],
       service: ['', Validators.required],
@@ -139,6 +141,27 @@ export class HomePersonaPage implements OnInit {
     this.getServiciosClinica();
     this.getMascotas(this.uid);
     this.getsolicitud();
+  }
+
+  async addDirection(){
+    // const ubicacion = this.ubicacionClinica.ubicacion;
+    const datos = {
+      idc: this.solicitudCli.idC,
+      uid: this.uid,
+      name: this.solicitudCli.nombreCli
+    };
+
+    const modalAdd = await this.modalControl.create({
+      component: CalificarPage,
+      mode:'ios',
+      //swipeToClose: true,
+      componentProps: {cal: datos}
+    });
+    await modalAdd.present();
+    const {data} = await modalAdd.onWillDismiss();
+    if (data) {
+      console.log('data ->', data);
+    }
   }
 
   //---------------------------------[MAPS]------------------------------------
@@ -570,7 +593,8 @@ export class HomePersonaPage implements OnInit {
           this.gotoSolicitud();
         }
         if (this.verifySolocitud.end === true){
-          console.log();
+          console.log('finalizo');
+          this.addDirection();
         }
       });
     } catch (error) { }
