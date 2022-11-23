@@ -49,7 +49,36 @@ export interface TipoMascota {
 
 export interface Solicitud {
     idC: string;
+    nombreCli: string;
     estadoSol: boolean;
+    cancelled: boolean;
+    end: boolean;
+    service: string;
+    hora: Date;
+    infoSolicitud: string;
+    mascota: {
+        nombreMasc: string;
+        edad: string;
+        raza: string;
+        info: string;
+        tipomascota: string;
+    };
+    usuario: {
+        nombre: string;
+        numCel: string;
+    };
+    ubicacion: {
+        lat: string;
+        lng: string;
+    };
+}
+
+export interface SolicitudCli {
+    idSol: string;
+    idC: string;
+    nombreCli: string;
+    estadoSol: boolean;
+    cancelled: boolean;
     end: boolean;
     service: string;
     hora: Date;
@@ -102,8 +131,7 @@ export interface SolClinicafil {
     serviciosClinica: {
         precio: number;
         service: string;
-    }
-    ;
+    };
 }
 
 export interface Calif {

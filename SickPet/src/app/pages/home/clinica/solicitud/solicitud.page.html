@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goToSolicitudes()">
+      <ion-icon class="arrowBack" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <h1>Solicitud en curso</h1>
+  </div>
+  <ion-item lines="none" class="btnslide-item">
+    <ion-label>
+      <h1>{{selectedSoli.usuario.nombre}}</h1>
+      <!-- <p><b>Fecha: </b>{{dateformat}}</p> -->
+      <p><b>Nombre de la mascota: </b>{{selectedSoli.mascota.nombreMasc}}</p>
+      <p><b>Edad de la mascota: </b>{{selectedSoli.mascota.edad}}</p>
+      <p><b>Tipo de mascota: </b>{{selectedSoli.mascota.tipomascota}}</p>
+      <p><b>Informacion de la mascota: </b>{{selectedSoli.mascota.info}}</p>
+      <p><b>Raza: </b>{{selectedSoli.mascota.raza}}</p>
+      <p><b>Numero de contacto: </b>{{selectedSoli.usuario.numCel}}</p>
+
+      <p> <b>Tipo de servicio:</b>{{selectedSoli.service}}</p>
+      <p> <b>Descripcion: </b> {{selectedSoli.infoSolicitud}} </p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none" class="finalizar">
+    <ion-button class="Agregar btn" (click)="finalizarAlert()" mode="ios">Finalizar servicio</ion-button>
+  </ion-item> 
+  
+
+</ion-content>

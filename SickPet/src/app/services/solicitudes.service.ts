@@ -1,14 +1,28 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { Calif } from '../models/models';
+import { Calif, UserClinica } from '../models/models';
+
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class ServiciosSolicitudes {
-    calificaciones: Calif [] = [];
+    calificaciones: Calif[] = [];
+    clinica: UserClinica = {
+        uID: '',
+        nombreCli: '',
+        calificacion: '',
+        nit: '',
+        numCelCli: '',
+        numCelCliOp: '',
+        ubicacion: {
+            lat: '',
+            lng: ''
+        },
+        serviciosClinica: [null]
+    };
 
     constructor(private firestore: AngularFirestore) { }
 
@@ -16,7 +30,7 @@ export class ServiciosSolicitudes {
         return this.firestore.collection('clinicasdb').snapshotChanges();
     }
 
-    generarSolicitudCollection(id: any, data: any){
+    generarSolicitudCollection(id: any, data: any) {
         const collection = this.firestore.collection('solicitudesdb');
         return collection.doc(id).set(data);
     }
@@ -34,25 +48,43 @@ export class ServiciosSolicitudes {
     }
 
     calificarClinica(data: any, idC: any) {
-        this.calificaciones = [];
-        this.firestore.collection('calificacionesdb').add(data).then(dat => {
-            this.getCal(idC).subscribe(ref => {
-                this.calificaciones.push({
-                    ...ref.payload.doc.data()
-                });
+        return this.firestore.collection('calificacionesdb').add(data).then(dat => {
+            this.getCal(idC).subscribe((ref: any) => {
+                if (ref) {
+                    this.calificaciones = [];
+                    ref.forEach((element: any) => {
+                        this.calificaciones.push({
+                            ...element.payload.doc.data()
+                        });
+                    });
+                    let sum = 0;
+                    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+                    for (let index = 0; index < this.calificaciones.length; index++) {
+                        sum = sum + this.calificaciones[index].calificacion;
+                    }
+                    this.getClinica(idC).subscribe((datos: any) => {
+                        if (datos) {
+                            this.clinica = datos;
+                            const cali = sum / this.calificaciones.length;
+                            this.clinica.calificacion = ('' + cali).substring(0, 3);
+                            this.setCalificacionCli(idC, this.clinica);
+                        }
+                    });
+                }
             });
-            let sum = 0;
-            // eslint-disable-next-line @typescript-eslint/prefer-for-of
-            for (let index = 0; index < this.calificaciones.length; index++) {
-                sum = sum + this.calificaciones[index].calificacion;
-            }
-            const calificacion = sum / this.calificaciones.length;
-            return this.firestore.collection('clinicasdb').doc(idC).set(calificacion);
         });
 
     }
 
-    getCal(idC: any): Observable<any> {
-        return this.firestore.collection('calificacionesdb', ref => ref.where('idC','==',idC)).snapshotChanges();
+    setCalificacionCli(idc: any, cal: any) {
+        return this.firestore.collection('clinicasdb').doc(idc).set(cal);
     }
+
+    getCal(idC: any): Observable<any> {
+        return this.firestore.collection('calificacionesdb', ref => ref.where('idC', '==', idC)).snapshotChanges();
+    }
+}
+
+interface Calificacion {
+    calificacion: string;
 }

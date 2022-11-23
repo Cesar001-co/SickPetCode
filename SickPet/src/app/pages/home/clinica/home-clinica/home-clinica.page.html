@@ -1,9 +1,81 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>homeClinica</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Clinica: {{clinicaData.nombreCli}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item button lines="none" (click)="goToSolicitudes()">
+      <ion-icon name="people-outline" slot="start"></ion-icon>
+      <ion-label>Solicitudes</ion-label>
+    </ion-item>
 
-<ion-content>
+    <ion-item button lines="none" (click)="goToSoliciCurso()">
+      <ion-icon name="documents-outline" slot="start"></ion-icon>
+      <ion-label>Solicitudes en curso</ion-label>
+    </ion-item>
 
-</ion-content>
+    <ion-item button lines="none">
+      <ion-icon src="assets/icons/ajustesicon.svg" slot="start"></ion-icon>
+      <ion-label>Ajustes</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none">
+      <ion-icon src="assets/icons/ayudaICon.svg" slot="start"></ion-icon>
+      <ion-label>Soporte</ion-label>
+    </ion-item>
+  </ion-content>
+  <ion-footer>
+    <ion-item lines="none" class="marit">
+      <ion-button class="btnCerrar" (click)="logOutAlert()"> Cerrar sesion </ion-button>
+    </ion-item>
+  </ion-footer>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-content>
+    <ion-menu-toggle>
+      <ion-button size="small" shape="circle" class="btnToolBar">
+        <ion-icon size="large" class="iconoMenu" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-menu-toggle>
+
+    <div>
+      <h1>Solicitudes</h1>
+      <h3 *ngIf="solFiltEspera.length === 0">No se encuentran solicitudes registradas</h3>
+    </div>
+
+    <ion-list>
+
+      <ion-item-sliding *ngFor='let solE of solFiltEspera'>
+        <ion-item-options side="start">
+          <ion-item-option expandable (click)="aceptarAlert(solE)">
+            <ion-icon slot="top" name="archive" name="checkmark-outline"></ion-icon>
+            Aceptar
+          </ion-item-option>
+        </ion-item-options>
+
+        <ion-item lines="none" class="btnslide-item">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-label>
+            <h1>{{solE.usuario.nombre}}</h1>
+            <p> <b>Tipo de servicio:</b> {{solE.service}}</p>
+              <p><b>Tipo de mascota: </b>{{solE.mascota.tipomascota}}</p>
+              <p><b>Raza: </b>{{solE.mascota.raza}}</p>
+            
+            <p> <b>Descripcion: </b>{{solE.infoSolicitud}} </p>
+          </ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" expandable (click)="rechazarAlert(solE)">
+            <ion-icon slot="top" name="trash"></ion-icon>
+            Rechazar
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
+  </ion-content>
+</div>

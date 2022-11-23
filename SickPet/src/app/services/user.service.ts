@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateEmail } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -32,6 +32,10 @@ export class UserService {
 
     login({ email, password }: any) {
         return signInWithEmailAndPassword(this.auth, email, password);
+    }
+
+    logout() {
+        return signOut(this.auth);
     }
 
     resetPassword({email}: any) {

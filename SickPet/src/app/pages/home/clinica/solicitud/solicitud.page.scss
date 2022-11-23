@@ -2,6 +2,12 @@ ion-content {
   --background: var(--ion-color-myColor-contrast);
 }
 
+.arrowBack {
+  color: var(--ion-color-myColor);
+  font-size: 30px;
+  padding-left: 13px;
+}
+
 .marit {
   margin: 10px;
 }
@@ -45,7 +51,7 @@ ion-content {
 }
 
 div {
-  padding: 27px 43px 0px 43px;
+  padding: 0px 43px 0px 43px;
   display: flex;
   flex-direction: column;
 
@@ -75,6 +81,11 @@ ion-item-option {
   border-radius: 20px;
 }
 
+ion-list {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .alingcenter {
   display: flex;
   justify-content: center;
@@ -89,4 +100,37 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.icono {
+  font-size: 30px;
+}
+
+.btn {
+  height: 70px;
+  width: 332px;
+  margin-bottom: 12px;
+
+  --border-radius: 40px;
+  --border-color: var(--ion-color-myColor-contrast): --border-style: solid;
+  --border-width: 2px;
+
+  --color: var(--ion-color-myColor-contrast);
+  font-family: Segoe UI;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.Agregar {
+  --color: var(--ion-color-myColor-contrast);
+  --color-activated: var(--ion-color-myColor);
+
+  --background: var(--ion-color-myColor);
+  --background-activated: var(--ion-color-myColor-contrast);
+}
+
+.finalizar {
+  padding-top: 480px;
+  display: flex;
+  justify-content: center;
 }

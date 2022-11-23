@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
-import { MascotaData, Solicitud, UserReg, SolClinica, SolClinicafil, UserClinica } from 'src/app/models/models';
+import { MascotaData, Solicitud, UserReg, SolClinica, SolClinicafil, UserClinica, Calif } from 'src/app/models/models';
 import { ServiciosMascotas } from 'src/app/services/mascotas.service';
 import { ServiciosClinica } from 'src/app/services/serviciosCli.service';
 import { ServiciosSolicitudes } from 'src/app/services/solicitudes.service';
@@ -10,7 +10,6 @@ import { UserService } from 'src/app/services/user.service';
 
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { BehaviorSubject } from 'rxjs';
-import { CalificarPage } from '../calificar/calificar.page';
 
 declare let google;
 
@@ -61,10 +60,18 @@ export class HomePersonaPage implements OnInit {
     }
   };
 
+  calificacion = 0;
+  calificaiconClinica: Calif = {
+    idC: '',
+    uID: '',
+    calificacion: 0
+  };
+
   lookSolicitud = true;       //
   searchSolicitud = false;    //solicitud 1 ruta busca
   generateSolicitud = false;  //Solicitud en curso...
   isModalOpen = false;        //lista de clinicas por servicio
+  isCalifiOpen = false;        //generar calificacion
   solicitudGenerada = false;  //solicutud 2 generada
 
   selectmascota: MascotaData;
@@ -73,6 +80,7 @@ export class HomePersonaPage implements OnInit {
     idC: '',
     estadoSol: false,
     end: false,
+    cancelled: false,
     service: '',
     hora: null,
     infoSolicitud: '',
@@ -91,6 +99,7 @@ export class HomePersonaPage implements OnInit {
       lat: '',
       lng: ''
     },
+    nombreCli: ''
   };
   verifySolocitud: Solicitud;
 
@@ -124,8 +133,7 @@ export class HomePersonaPage implements OnInit {
     private mascotasService: ServiciosMascotas,
     private fb: FormBuilder,
     private solicitudService: ServiciosSolicitudes,
-    private geolocation: Geolocation,
-    private modalControl: ModalController) {
+    private geolocation: Geolocation) {
     this.solicform = this.fb.group({
       infoSolicitud: [''],
       service: ['', Validators.required],
@@ -136,32 +144,29 @@ export class HomePersonaPage implements OnInit {
   ngOnInit() {
     this.mylocantion();
     this.uid = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('user id', this.uid);
+    //console.log('user id', this.uid);
     this.getUserData();
     this.getServiciosClinica();
     this.getMascotas(this.uid);
     this.getsolicitud();
   }
 
-  async addDirection(){
-    // const ubicacion = this.ubicacionClinica.ubicacion;
-    const datos = {
-      idc: this.solicitudCli.idC,
-      uid: this.uid,
-      name: this.solicitudCli.nombreCli
-    };
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/login']);
+  }
 
-    const modalAdd = await this.modalControl.create({
-      component: CalificarPage,
-      mode:'ios',
-      //swipeToClose: true,
-      componentProps: {cal: datos}
-    });
-    await modalAdd.present();
-    const {data} = await modalAdd.onWillDismiss();
-    if (data) {
-      console.log('data ->', data);
+  calicar(item) {
+    for (let index = 0; index < 5; index++) {
+      if (index < item) {
+        document.getElementById((index + 1) + 'estrella').style
+          .cssText = 'color: var(--ion-color-myColor);';
+      } else {
+        document.getElementById((index + 1) + 'estrella').style
+          .cssText = 'color: #DDBEF5;';
+      }
     }
+    this.calificacion = item;
   }
 
   //---------------------------------[MAPS]------------------------------------
@@ -199,11 +204,15 @@ export class HomePersonaPage implements OnInit {
   }
 
   addMarkerUs(position: any) {
-    const latLng = new google.maps.LatLng(position.lat, position.lng);
+    try {
+      const latLng = new google.maps.LatLng(position.lat, position.lng);
 
-    this.markerUs.setPosition(latLng);
-    this.map.panTo(position);
-    this.myUbicacion = position;
+      this.markerUs.setPosition(latLng);
+      this.map.panTo(position);
+      this.myUbicacion = position;
+    } catch (error) {
+      console.log();
+    }
   }
 
   addMarkerCli(position: any) {
@@ -260,9 +269,11 @@ export class HomePersonaPage implements OnInit {
   }
 
   getUserData() {
-    this.userService.getDatosUsuario(this.uid).subscribe(data => {
-      this.userData = data;
-      this.mascotnum();
+    this.userService.getDatosUsuario(this.uid).subscribe((data: any) => {
+      if (data) {
+        this.userData = data;
+        this.mascotnum();
+      }
     });
   }
 
@@ -282,39 +293,44 @@ export class HomePersonaPage implements OnInit {
   }
 
   getServiciosClinica() {
-    this.clinicaService.getServices().subscribe(data => {
-      this.services = [];
-      data.forEach((element: any) => {
-        this.services.push({
-          ...element.payload.doc.data(),
+    this.clinicaService.getServices().subscribe((data: any) => {
+      if (data) {
+        this.services = [];
+        data.forEach((element: any) => {
+          this.services.push({
+            ...element.payload.doc.data(),
+          });
         });
-      });
+      }
     });
   }
 
-  getClinicasServicio(service: any) {
-    this.solicitudService.getClinicasByService().subscribe((actionArray) => {
-      this.clinicabyServicios = actionArray.map((item) => ({
-        idC: item.payload.doc.id,
-        nombreCli: item.payload.doc.data().nombreCli,
-        numCelCli: item.payload.doc.data().numCelCli,
-        numCelCliOp: item.payload.doc.data().numCelCliOp,
-        calificacion: item.payload.doc.data().calificacion,
-        ubicacion: {
-          lat: item.payload.doc.data().ubicacion.lat,
-          lng: item.payload.doc.data().ubicacion.lng,
-        },
-        serviciosClinica: item.payload.doc.data().serviciosClinica
-      }));
-      this.getCliFilterByService(service);
+  getClinicasServicio(service: string) {
+    this.solicitudService.getClinicasByService().subscribe((actionArray: any) => {
+      if (actionArray) {
+        this.clinicabyServicios = actionArray.map((item) => ({
+          idC: item.payload.doc.id,
+          nombreCli: item.payload.doc.data().nombreCli,
+          numCelCli: item.payload.doc.data().numCelCli,
+          numCelCliOp: item.payload.doc.data().numCelCliOp,
+          calificacion: item.payload.doc.data().calificacion,
+          ubicacion: {
+            lat: item.payload.doc.data().ubicacion.lat,
+            lng: item.payload.doc.data().ubicacion.lng,
+          },
+          serviciosClinica: item.payload.doc.data().serviciosClinica
+        }));
+        this.getCliFilterByService(service);
+      }
     });
   }
 
-  getCliFilterByService(service: any) {
+  getCliFilterByService(service: string) {
+    //console.log(service);
     this.clinicabyServiciosFilt = [];
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.clinicabyServicios.length; i++) {
-      console.log(this.clinicabyServicios[i].serviciosClinica.map(x => x.service === service));
+      //console.log(this.clinicabyServicios[i].serviciosClinica.map(x => x.service === service));
       // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let y = 0; y < this.clinicabyServicios[i].serviciosClinica.length; y++) {
         const a = this.clinicabyServicios[i].serviciosClinica[y].service;
@@ -337,18 +353,20 @@ export class HomePersonaPage implements OnInit {
         }
       }
     }
-    console.log('Lista filtrada => ', this.clinicabyServiciosFilt);
+    //console.log('Lista filtrada => ', this.clinicabyServiciosFilt);
   }
 
   getMascotas(id: any) {
-    this.mascotasService.getUserMascotas(id).subscribe(data => {
-      this.mascotas = [];
-      data.forEach((element: any) => {
-        this.mascotas.push({
-          idM: element.payload.doc.id,
-          ...element.payload.doc.data()
+    this.mascotasService.getUserMascotas(id).subscribe((data: any) => {
+      if (data) {
+        this.mascotas = [];
+        data.forEach((element: any) => {
+          this.mascotas.push({
+            idM: element.payload.doc.id,
+            ...element.payload.doc.data()
+          });
         });
-      });
+      }
     });
   }
 
@@ -486,7 +504,79 @@ export class HomePersonaPage implements OnInit {
 
     await alert.present();
   }
-  // ==================
+
+  async confirmCaliAlert() {
+    const alert = await this.alertController.create({
+      header: 'Confirmacion',
+      message: 'Desea calificar a ' + this.verifySolocitud.nombreCli + ' con ' + this.calificacion + ' estrellas ?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'destructive',
+          handler: () => {
+          },
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirm',
+          handler: () => {
+            this.setCalificacion();
+          },
+        },
+      ],
+      mode: 'ios',
+      backdropDismiss: false
+    });
+
+    await alert.present();
+  }
+
+  async callAlert() {
+    const alert = await this.alertController.create({
+      header: 'Calificacion genarada con exito',
+      message: 'Gracias por calificar los servicios de ' + this.verifySolocitud.nombreCli,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'confirm',
+          handler: () => {
+          },
+        },
+      ],
+      mode: 'ios',
+      backdropDismiss: false
+    });
+
+    await alert.present();
+  }
+
+  async logOutAlert() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar Sesion',
+      message: 'Desea cerrar sesion?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'destructive',
+          handler: () => {
+          },
+        },
+        {
+          text: 'CONFIRMAR',
+          role: 'confirm',
+          handler: () => {
+            this.logout();
+          },
+        },
+      ],
+      mode: 'ios',
+      backdropDismiss: false
+    });
+
+    await alert.present();
+  }
+
+  // ==================logout()
 
   countDown(duration: any) {
     clearInterval(this.interval);
@@ -533,6 +623,7 @@ export class HomePersonaPage implements OnInit {
 
   goToInicio() {
     this.lookSolicitud = true;
+    this.searchSolicitud = false;
     this.solicform.get('service').setValue('');
     this.solicform.get('mascota').setValue('');
     this.removeMarkerCli();
@@ -572,6 +663,7 @@ export class HomePersonaPage implements OnInit {
     this.dataSolicitud.usuario.nombre = this.userData.nombres + ' ' + this.userData.apellidos;
     this.dataSolicitud.usuario.numCel = this.userData.numCon;
     // data clinica
+    this.dataSolicitud.nombreCli = this.selectedCli.nombreCli;
     this.dataSolicitud.idC = this.selectedCli.idC;
     this.dataSolicitud.ubicacion.lat = this.selectedCli.ubicacion.lat;
     this.dataSolicitud.ubicacion.lng = this.selectedCli.ubicacion.lng;
@@ -583,26 +675,37 @@ export class HomePersonaPage implements OnInit {
   }
 
   getsolicitud() {
-    try {
-      this.solicitudService.getSolicitudbyUser(this.uid).subscribe((data) => {
+
+    this.solicitudService.getSolicitudbyUser(this.uid).subscribe((data: any) => {
+      if (data) {
         this.verifySolocitud = data;
-        console.log(this.verifySolocitud.estadoSol);
         if (this.verifySolocitud.estadoSol === true) {
+
           this.alertController.dismiss();
+
           this.stopTimer();
           this.gotoSolicitud();
+
         }
-        if (this.verifySolocitud.end === true){
+        if (this.verifySolocitud.end === true) {
           console.log('finalizo');
-          this.addDirection();
+          this.isCalifiOpen = true;
         }
-      });
-    } catch (error) { }
+        if (this.verifySolocitud.cancelled === true) {
+          this.alertController.dismiss();
+          this.stopTimer();
+          this.cancelSolicitud();
+        }
+      }
+    });
+
   }
 
   getClinica(idC: any) {
-    this.solicitudService.getClinica(idC).subscribe((data) => {
-      this.solicitudCli = data;
+    this.solicitudService.getClinica(idC).subscribe((data: any) => {
+      if (data) {
+        this.solicitudCli = data;
+      }
     });
   }
 
@@ -611,7 +714,6 @@ export class HomePersonaPage implements OnInit {
     this.searchSolicitud = false;
     this.solicitudGenerada = true;
 
-    //this.getUserSolicitud();
     this.getClinica(this.verifySolocitud.idC);
     this.addMarkerCli(this.verifySolocitud.ubicacion);
     this.calculateAndDisplayRoute(this.verifySolocitud.ubicacion);
@@ -620,6 +722,30 @@ export class HomePersonaPage implements OnInit {
   buscarSolicitud() {
     this.isModalOpen = true;
     this.getClinicasServicio(this.selectedService);
+  }
+
+  setCalificacion() {
+    this.calificaiconClinica.idC = this.verifySolocitud.idC;
+    this.calificaiconClinica.uID = this.uid;
+    this.calificaiconClinica.calificacion = this.calificacion;
+    this.solicitudService.calificarClinica(this.calificaiconClinica, this.calificaiconClinica.idC).then(a => {
+      this.calificacion = 0;
+      console.log('eliminao');
+      this.solicitudService.deleteSolicitud(this.uid);
+      this.lookSolicitud = true;
+      this.searchSolicitud = false;
+      this.solicitudGenerada = false;
+      this.solicform.get('service').setValue('');
+      this.solicform.get('mascota').setValue('');
+      this.removeMarkerCli();
+      this.isCalifiOpen = false;
+      this.callAlert();
+      this.tuControlador(window);
+    });
+
+  }
+  tuControlador($window) {
+    $window.location.reload(true);
   }
 }
 

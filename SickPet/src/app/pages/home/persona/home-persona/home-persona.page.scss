@@ -2,7 +2,7 @@ ion-content {
   --background: var(--ion-color-myColor-contrast);
 }
 
-#map{
+#map {
   height: 600px;
 }
 
@@ -192,6 +192,29 @@ ion-item.item-has-focus>ion-label {
   --background-activated: var(--ion-color-myColor-contrast);
 }
 
+.marit {
+  margin: 10px;
+}
+
+.btnCerrar {
+  height: 60px;
+  width: 332px;
+
+  --border-radius: 40px;
+  --border-color: var(--ion-color-myColor-contrast): --border-style: solid;
+  --border-width: 2px;
+
+  --color: var(--ion-color-myColor-contrast);
+  font-family: Segoe UI;
+  font-size: 20px;
+  font-weight: bold;
+
+  --color-activated: var(--ion-color-myColor-contrast);
+
+  --background: var(--ion-color-myColor);
+  --background-activated: var(--ion-color-myColor-contrast);
+}
+
 ion-select {
   width: 100%;
 }
@@ -250,4 +273,24 @@ ion-select::part(icon) {
 
 .clinciaInfo {
   margin-top: 43px;
+}
+
+.flexcenterCal {
+  margin-top: 92px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start {
+  margin: 10px;
+  color: #DDBEF5;
+}
+
+.finalizar {
+  padding-top: 500px;
+  display: flex;
+  justify-content: center;
 }

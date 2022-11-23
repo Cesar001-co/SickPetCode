@@ -25,6 +25,11 @@
       <ion-label>Soporte</ion-label>
     </ion-item>
   </ion-content>
+  <ion-footer>
+    <ion-item lines="none" class="marit">
+      <ion-button class="btnCerrar" (click)="logOutAlert()"> Cerrar sesion </ion-button>
+    </ion-item>
+  </ion-footer>
 </ion-menu>
 
 <div class="ion-page" id="main-content">
@@ -50,7 +55,8 @@
         <ion-content>
           <div class="flexcenter mod">
             <ion-label class="labeltext"> Buscando en tu zona ...</ion-label>
-            <ion-label *ngIf="clinicabyServiciosFilt.length === 0" class="labeltext"> <b> No hay clinicas :( </b></ion-label>
+            <ion-label *ngIf="clinicabyServiciosFilt.length === 0" class="labeltext"> <b> No hay clinicas :( </b>
+            </ion-label>
             <ion-list>
               <ion-item lines="none" class="ListaClinica" *ngFor="let clibyService of clinicabyServiciosFilt">
                 <ion-label class="nomPre">
@@ -61,7 +67,8 @@
                   <ion-icon name="star" class="icon"></ion-icon>
                   <h2 class="calificacion">{{clibyService.calificacion}}</h2>
                 </ion-item>
-                <ion-button class="btnver" (click)="goTolocalizacion(clibyService)"> Ver </ion-button>
+                <ion-button class="btnver" onclick="open-modal" (click)="goTolocalizacion(clibyService)"> Ver
+                </ion-button>
               </ion-item>
             </ion-list>
           </div>
@@ -69,6 +76,34 @@
         </ion-content>
       </ng-template>
     </ion-modal>
+
+    <ion-modal #modal [initialBreakpoint]="1" [isOpen]="isCalifiOpen">
+      <ng-template>
+        <ion-content>
+          <div class="flexcenterCal">
+            <p>califica su servicio</p>
+
+            <h3> <b>{{verifySolocitud.nombreCli}}</b> </h3>
+            <ion-item lines="none" class="starsGroup">
+              <ion-icon class="start" name="star" (click)="calicar(1)" id="1estrella"></ion-icon>
+              <ion-icon class="start" name="star" (click)="calicar(2)" id="2estrella"></ion-icon>
+              <ion-icon class="start" name="star" (click)="calicar(3)" id="3estrella"></ion-icon>
+              <ion-icon class="start" name="star" (click)="calicar(4)" id="4estrella"></ion-icon>
+              <ion-icon class="start" name="star" (click)="calicar(5)" id="5estrella"></ion-icon>
+            </ion-item>
+            <ion-label> {{calificacion}} </ion-label>
+          </div>
+
+          <ion-label class="finalizar">
+            <ion-button class="btn Agregar" mode="ios" [disabled]="calificacion <= 0" (click)="confirmCaliAlert()">
+              Finalizar
+            </ion-button>
+          </ion-label>
+
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
     <!--  -->
 
     <div class="flota">
@@ -142,8 +177,9 @@
       <div *ngIf="solicitudGenerada === true">
         <ion-item class="clinciaInfo">
           <ion-label>
+            <p>Solicitud en curso ...</p>
             <h1> <b> {{solicitudCli.nombreCli}} </b> </h1>
-            <h3> <b>Contacto:</b>  </h3>
+            <h3> <b>Contacto:</b> </h3>
             <p>{{solicitudCli.numCelCli}}</p>
             <p *ngIf="solicitudCli.numCelCliOp.length > 0">{{solicitudCli.numCelCliOp}}</p>
           </ion-label>
@@ -153,11 +189,11 @@
           </ion-item>
         </ion-item>
 
-        <ion-item >
+        <ion-item>
           <ion-label>
-            <h3> <b>Servicio:</b>  </h3>
+            <h3> <b>Servicio:</b> </h3>
             <p>{{verifySolocitud.service}}</p>
-            <h3> <b>Mascota:</b>  </h3>
+            <h3> <b>Mascota:</b> </h3>
             <p>{{verifySolocitud.mascota.nombreMasc}}</p>
           </ion-label>
         </ion-item>

@@ -58,10 +58,18 @@ const routes: Routes = [
   {
     path: 'mascotasform/:idm/:idu',
     loadChildren: () => import('./pages/home/persona/mascotas/mascotasform/mascotasform.module').then(m => m.MascotasformPageModule)
-  },  {
-    path: 'calificar',
-    loadChildren: () => import('./pages/home/persona/calificar/calificar.module').then( m => m.CalificarPageModule)
   },
+  {
+    path: 'solicitudes-curso/:id',
+    loadChildren: () => import('./pages/home/clinica/solicitudes-curso/solicitudes-curso.module').then( m => m.SolicitudesCursoPageModule)
+  },
+  {
+    path: 'solicitud/:id/:solicitud',
+    loadChildren: () => import('./pages/home/clinica/solicitud/solicitud.module').then( m => m.SolicitudPageModule)
+  },
+
+
+
 
 
 

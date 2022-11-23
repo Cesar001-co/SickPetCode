@@ -7,15 +7,15 @@ import { ServiciosSolicitudes } from 'src/app/services/solicitudes.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-home-clinica',
-  templateUrl: './home-clinica.page.html',
-  styleUrls: ['./home-clinica.page.scss'],
+  selector: 'app-solicitudes-curso',
+  templateUrl: './solicitudes-curso.page.html',
+  styleUrls: ['./solicitudes-curso.page.scss'],
 })
-export class HomeClinicaPage implements OnInit {
+export class SolicitudesCursoPage implements OnInit {
 
   idC: any;
 
-  solicitudes: SolicitudCli[] = [];
+  solicitudes: Solicitud[] = [];
   clinicaData: UserClinica = {
     uID: '',
     nombreCli: '',
@@ -30,6 +30,7 @@ export class HomeClinicaPage implements OnInit {
     serviciosClinica: [null]
   };
   selectedSoli: SolicitudCli = {
+    idSol: '',
     idC: '',
     nombreCli: '',
     estadoSol: false,
@@ -52,12 +53,10 @@ export class HomeClinicaPage implements OnInit {
     ubicacion: {
       lat: '',
       lng: ''
-    },
-    idSol: ''
+    }
   };
 
-  solFiltEspera: SolicitudCli[] = [];
-  //solFiltCurso: Solicitud[] = [];
+  solFiltCurso: Solicitud[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -75,62 +74,10 @@ export class HomeClinicaPage implements OnInit {
   }
 
   //----------------------------------------------------------------[Alerts]----------------------------------------------------------------
-  async logOutAlert() {
-    const alert = await this.alertController.create({
-      header: 'Cerrar Sesion',
-      message: 'Desea cerrar sesion?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'destructive',
-          handler: () => {
-          },
-        },
-        {
-          text: 'CONFIRMAR',
-          role: 'confirm',
-          handler: () => {
-            this.logout();
-          },
-        },
-      ],
-      mode: 'ios',
-      backdropDismiss: false
-    });
-
-    await alert.present();
-  }
-
-  async aceptarAlert(solicitud: any) {
-    const alert = await this.alertController.create({
-      header: 'Solicitud',
-      message: 'Desea aporbar solicitud?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'destructive',
-          handler: () => {
-          },
-        },
-        {
-          text: 'CONFIRMAR',
-          role: 'confirm',
-          handler: () => {
-            this.acpetarSol(solicitud);
-          },
-        },
-      ],
-      mode: 'ios',
-      backdropDismiss: false
-    });
-
-    await alert.present();
-  }
-
   async rechazarAlert(solicitud: any) {
     const alert = await this.alertController.create({
-      header: 'Solicitud',
-      message: 'Desea rechazar solicitud?',
+      header: 'Finalizar',
+      message: 'Desea finalizar solicitud?',
       buttons: [
         {
           text: 'Cancelar',
@@ -142,7 +89,7 @@ export class HomeClinicaPage implements OnInit {
           text: 'CONFIRMAR',
           role: 'confirm',
           handler: () => {
-            this.rechazarSol(solicitud);
+            this.finalizarSol(solicitud);
           },
         },
       ],
@@ -170,7 +117,7 @@ export class HomeClinicaPage implements OnInit {
         data.forEach((element: any) => {
           this.solicitudes.push({
             idSol: element.payload.doc.id,
-            ...element.payload.doc.data(),
+            ...element.payload.doc.data()
           });
         });
         this.getSoliFilt();
@@ -179,11 +126,11 @@ export class HomeClinicaPage implements OnInit {
   }
 
   getSoliFilt() {
-    this.solFiltEspera = [];
+    this.solFiltCurso = [];
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.solicitudes.length; i++) {
-      if (this.solicitudes[i].estadoSol === false) {
-        this.solFiltEspera.push({
+      if (this.solicitudes[i].estadoSol === true) {
+        this.solFiltCurso.push({
           ...this.solicitudes[i]
         });
       }
@@ -198,30 +145,18 @@ export class HomeClinicaPage implements OnInit {
   goToSoliciCurso() {
     this.router.navigate(['/solicitudes-curso', this.idC]);
   }
+
+  goToSolicitud(solicitud: any){
+    this.selectedSoli = solicitud;
+    this.router.navigate(['/solicitud', this.idC,this.selectedSoli.idSol]);
+  }
   //----------------------------------------------------------------------------------------------------------------------------------------
   //------------------------------------------------------------------[...]-----------------------------------------------------------------
-  logout(){
-    this.userService.logout();
-    this.router.navigate(['/login']);
-  }
-
-  acpetarSol(solicitud: any) {
-    //aceptar solicutud estadoSol = true
+  finalizarSol(solicitud: any){
     this.selectedSoli = solicitud;
-    this.selectedSoli.estadoSol = true;
-    console.log(this.selectedSoli);
-    this.clinicaService.updateSolicitud(this.selectedSoli.idSol, this.selectedSoli);
-  }
-
-  rechazarSol(solicitud: any) {
-    //aceptar solicutud cancelled = true
-    this.selectedSoli = solicitud;
-    this.selectedSoli.cancelled = true;
+    this.selectedSoli.end = true;
     console.log(this.selectedSoli);
     this.clinicaService.updateSolicitud(this.selectedSoli.idSol, this.selectedSoli);
   }
   //----------------------------------------------------------------------------------------------------------------------------------------
-
-
-
 }
