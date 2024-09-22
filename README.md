@@ -1,6 +1,19 @@
-# SickPet
+# Aplicativo movil con Ionic, Firebase y Google Maps
+Creación de una aplicación para dispositvos Android utilizando el framework Ionic de Angular junto con Firebase Database como base de datos, además de APIs como Maps JavaScript API y Directions API.
+
+### SickPet Project
+
 ¿Qué es SickPet?
 SickPet es una aplicación móvil creada para gestionar la atención de mascotas y animales por parte de las clínicas veterinarias y los dueños de ellos.
+
+### Tecnologías Implementadas
+
+### Dependencias Implementadas
+
+## Visualización y funcionamiento de la aplicación SickPet
+
+## Manual de uso de la aplicación SickPet
+
 
 FUNCIONAMIENTO (video)
 
