@@ -7,7 +7,9 @@ Creación de una aplicación para dispositvos Android utilizando el framework Io
 SickPet es una aplicación móvil creada para gestionar la atención de mascotas y animales por parte de las clínicas veterinarias y los dueños de ellos.
 
 ### Tecnologías Implementadas
-
+| Tecnologías | Versión | Finalidad |
+|--------------|------|----------|
+| Juan Pérez   | 25   | México   |
 ### Dependencias Implementadas
 
 ## Visualización y funcionamiento de la aplicación SickPet
