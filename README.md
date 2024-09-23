@@ -26,10 +26,9 @@ SickPet es una aplicación móvil creada para gestionar la atención de mascotas
 | countdown  | 2.6.0 | Biblioteca para crear contadores regresivos. |
 | ionicons  | 6.0.3 | Conjunto de iconos de código abierto utilizado en aplicaciones Ionic. |
 
-## Visualización y funcionamiento de la aplicación SickPet
-FUNCIONAMIENTO (video)
-https://drive.google.com/file/d/1v2UJZ96rL4F1dc0tNz9MGko_ALuZ8KrB/view?usp=sharing
+### Visualización y funcionamiento de la aplicación SickPet
+[FUNCIONAMIENTO (video)](https://drive.google.com/file/d/1v2UJZ96rL4F1dc0tNz9MGko_ALuZ8KrB/view?usp=sharing)
 
 ## Manual de uso de la aplicación SickPet
-https://drive.google.com/file/d/1x1cDVZ1ytAFWWbIPwvAPZOsAkRV72Q3d/view?usp=sharing
+[Manual de uso SickPet](https://drive.google.com/file/d/1_Tum9wVzvw-_LlEBjHsCC_hFgVJG-elP/view?usp=drive_link)
 
